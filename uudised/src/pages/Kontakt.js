@@ -10,17 +10,17 @@ function Kontakt() {
 		<div>
 			<div>See on kontakt leht, nähtav localhost:3000/kontakt aadressil</div>
 			<h1>Võta meiega ühendust:</h1>
-			<div className='Address'>
+			<div className={n2itaTelKristiine === true ? "valitud aadress" : 'aadress' }>
 				<h3 onClick={() => muudaN2itaTelKristiine(!n2itaTelKristiine)}>Kristiine keskus</h3>
 				{n2itaTelKristiine && <p>+3451233123</p>}
 				<p>Endal 45</p>
 			</div>
-			<div className='Address'>
+			<div className={n2itaTelYlemiste === true ? "valitud aadress" : 'aadress' }>
 				<h3 onClick={() => muudaN2itaTelYlemiste(!n2itaTelYlemiste)}>Ülemiste keskus</h3>
 				{n2itaTelYlemiste && <p>+3451233123</p>}
 				<p>Suur-Sõjamäe 4</p>
 			</div>
-			<div className='Address'>
+			<div className={n2itaTelTasku === true ? "valitud aadress" : 'aadress' }>
 				<h3 onClick={() => muudaN2itaTelTasku(!n2itaTelTasku)}>Tasku keskus</h3>
 				{n2itaTelTasku && <p>+3451233123</p>}
 				<p>Turu 2</p>
