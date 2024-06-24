@@ -2,12 +2,16 @@
 import './sass/App.sass';
 import Table from './components/Table';
 import Video from './components/Video';
+import Login from './components/Login';
 
 function App() {
+
   return (
     <div className="App">
+			
+			<Login/>
 
-      <h1>Sinine tekst</h1>
+			<h1>Sinine tekst</h1>
       <h2>Roheline tekst</h2>
       <button>Roheline nupp</button>
 
@@ -20,6 +24,8 @@ function App() {
       <Table />
 
 			<Video />
+
+			
 			
     </div>
   );
