@@ -1,6 +1,14 @@
 .App {
   text-align: center;
 }
+
+.App-dark {
+  text-align: center;
+  background-color: black;
+  color: white;
+  min-height: 100vh;
+}
+
 .pilt {
   width: 100px;
   object-fit: contain;
@@ -18,4 +26,13 @@
 .keskus-aktiivne {
   color: purple;
   text-decoration: underline;
+}
+
+table {
+  width: 80%;
+  margin: 0 10%;
+}
+
+td, th {
+  border: 1px solid black;
 }

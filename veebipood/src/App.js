@@ -8,11 +8,21 @@ import HaldaTooteid from './pages/HaldaTooteid';
 import Esindused from './pages/Esindused';
 import Kinkekaart from './pages/Kinkekaart';
 import Menyy from './components/Menyy';
+import { useState } from 'react';
 
 function App() {
+  const [isDarkMode, setDarkMode] = useState(localStorage.getItem('dark-mode') === 'true');
+
+  const darkMode = (isDark) => {
+    setDarkMode(isDark);
+    localStorage.setItem('dark-mode', isDark)
+  }
+
   return (
-    <div className="App">
-    <Menyy />
+    <div className={isDarkMode ? "App-dark" : "App" }>
+      <Menyy />
+      <button onClick={() => darkMode(true)}>Dark</button>
+      <button onClick={() => darkMode(false)}>Light</button>
 
       {/* path="eraklient" localhost:3000/eraklient */}
       <Routes>

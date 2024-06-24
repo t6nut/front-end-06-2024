@@ -1,8 +1,11 @@
 import React, {useState} from 'react'
+import tallinnJSON from '../data/tallinn.json'
 
 function Esindused() {
     //let keskus = "Narva";
     const [keskus, setKeskus] = useState("Pärnu");
+    //const [tallinn, setTallinn] = useState(tallinnJSON);
+    const tallinn = tallinnJSON;
     
   return (
     <div>
@@ -14,12 +17,7 @@ function Esindused() {
         {
         keskus=== "Tallinn" &&
         <div>
-            <div>Ülemiste</div>
-            <div>Rocca Al Mare</div>
-            <div>Magistrali</div>
-            <div>Vesse</div>
-            <div>Kristiine</div>
-            <div>Järveotsa</div>
+            {tallinn.map(t => <div>{t}</div>)}
         </div>
         }
 
