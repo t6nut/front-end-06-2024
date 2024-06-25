@@ -1,6 +1,6 @@
 [
     {"nimi": "Nobe", "hind": 25000, "aktiivne": true, "pilt": "https://dalton.ee/wp-content/uploads/2019/10/nobercar1.jpg"},
-    {"nimi": "Tesla", "hind": 50000, "aktiivne": false, "pilt": "https://elektriautod.ee/wp-content/uploads/elektriauto-tesla-cybertruck.jpg"},
+    {"nimi": "Tesla S", "hind": 50000, "aktiivne": false, "pilt": "https://elektriautod.ee/wp-content/uploads/elektriauto-tesla-cybertruck.jpg"},
     {"nimi": "Toyota", "hind": 75000, "aktiivne": true, "pilt": "https://www.bmw.ee/content/dam/bmw/common/all-models/m-series/m8-gran-coupe/2022/navigation/bmw-m8-competition-gran-coupe-modelfinder.png"},
     {"nimi": "BMW", "hind": 35000, "aktiivne": true, "pilt": "https://www.bmw.ee/content/dam/bmw/common/all-models/m-series/m8-gran-coupe/2022/navigation/bmw-m8-competition-gran-coupe-modelfinder.png"}
 ]

@@ -36,3 +36,9 @@ table {
 td, th {
   border: 1px solid black;
 }
+
+.map {
+	height: 300px;
+	margin: 3%;
+	border-radius: 10px;
+}

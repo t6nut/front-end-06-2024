@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import tootedJSON from '../data/tooted.json';
 import ostukorvJSON from "../data/ostukorv.json";
+import { Link } from 'react-router-dom';
 
 function Avaleht() {
 
@@ -71,10 +72,12 @@ function Avaleht() {
       <button onClick={filtreeriTeineTahtO}>Filtreeri kellel on teine t2ht O</button>
 
       {tooted.map(toode => 
-        <div>
-          <img className="pilt" src={toode.pilt} alt="" />
-          <div>{toode.nimi}</div>
-          <div>{toode.hind}</div>
+        <div key={toode.nimi}>
+					<Link to={"/toode/" + toode.nimi.toLowerCase().replaceAll(" ", "-")}>
+						<img className="pilt" src={toode.pilt} alt="" />
+						<div>{toode.nimi}</div>
+						<div>{toode.hind}</div>
+					</Link>
           {toode.aktiivne && <button onClick={() => lisaOstukorvi(toode)}>Lisa ostukorvi</button>}
         </div>
       )}

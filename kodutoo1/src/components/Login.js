@@ -16,7 +16,7 @@ function Login() {
 				</div>
 			}
 			{sisselogitud === 'jah' && 
-				<button onClick={() => sisselogitud('ei')}>Logi välja</button>
+				<button onClick={() => muudaSisselogitud('ei')}>Logi välja</button>
 			}
 		</div>
 	)

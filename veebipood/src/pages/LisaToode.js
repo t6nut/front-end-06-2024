@@ -29,9 +29,9 @@ function LisaToode() {
 
     const uusToode = {
       'nimi': nimiRef.current.value,
-      'hind': hindRef.current.value,
+      'hind': Number(hindRef.current.value),
       'pilt': piltRef.current.value,
-      'aktiivne': aktiivneRef.current.value,
+      'aktiivne': aktiivneRef.current.checked,
     }
 
     tootedJSON.push(uusToode);
@@ -57,11 +57,11 @@ function LisaToode() {
       <label>Toote nimi</label> <br />
       <input ref={nimiRef} type="text" /> <br />
       <label>Toote hind</label> <br />
-      <input ref={hindRef} type="text" /> <br />
+      <input ref={hindRef} type="number" /> <br />
       <label>Toote pilt</label> <br />
       <input onChange={kontrolli} ref={piltRef} type="text" /> <br />
       <label>Toote aktiivsus</label> <br />
-      <input ref={aktiivneRef} type="text" /> <br />
+      <input ref={aktiivneRef} type="checkbox" /> <br />
       <button onClick={lisa}>Sisesta</button> <br />
       <ToastContainer 
         position="bottom-right"

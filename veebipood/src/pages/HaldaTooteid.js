@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import tootedJSON from '../data/tooted.json'
+import { Link } from 'react-router-dom';
 
 function HaldaTooteid() {
   const [tooted, setTooted] = useState(tootedJSON);
@@ -22,13 +23,15 @@ function HaldaTooteid() {
         </thead>
         <tbody>
           {tooted.map((t, index) => 
-            <tr>
+            <tr key={t.nimi}>
               <td><img className='pilt' src={t.pilt} alt="" /></td>
               <td>{t.nimi}</td>
               <td>{t.hind}</td>
               <td>
                 <button onClick={() => kustuta(index)}>Kustuta</button>
-                <button>Muuda</button>
+								<Link to={"/muuda-toode/" + index}>
+									<button>Muuda</button>
+								</Link>
               </td>
             </tr>
           )}

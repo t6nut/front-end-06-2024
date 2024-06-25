@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
 import tallinnJSON from '../data/tallinn.json'
+import { Link } from 'react-router-dom';
 
 function Esindused() {
     //let keskus = "Narva";
-    const [keskus, setKeskus] = useState("Pärnu");
+    const [keskus, setKeskus] = useState("Tallinn");
     //const [tallinn, setTallinn] = useState(tallinnJSON);
     const tallinn = tallinnJSON;
     
@@ -17,7 +18,14 @@ function Esindused() {
         {
         keskus=== "Tallinn" &&
         <div>
-            {tallinn.map(t => <div>{t}</div>)}
+            {tallinn.map((t, i) => 
+						<div key={t}>
+							{t}
+							<Link to={"/esindus/" + i}>
+								<button>Vt lähemalt</button>
+							</Link>
+							</div>
+						)}
         </div>
         }
 
