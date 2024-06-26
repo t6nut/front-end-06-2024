@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 function Menyy() {
   return (
     <div>
-        <Link to="avaleht">
+			<Link to="avaleht">
         <img className="pilt" src="https://dalton.ee/wp-content/uploads/2019/10/nobercar1.jpg" alt="" />
       </Link>
 
