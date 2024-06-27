@@ -37,8 +37,16 @@
   }
 }
 
+table {
+  margin: 3%;
+}
+
+td, th {
+  border: 1px solid black;
+}
+
 .image {
-	max-width: 300px;
+	max-width: 100px;
 	width: 100%;
 	object-fit: contain;
 }

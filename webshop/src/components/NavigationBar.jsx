@@ -10,6 +10,7 @@ function NavigationBar() {
 			<Link to="/cart">
 				<button>Cart</button>
 			</Link>
+			<Link to="/admin">Admin</Link>
 		</div>
 	)
 }

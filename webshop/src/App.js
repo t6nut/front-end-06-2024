@@ -30,7 +30,7 @@ function App() {
 
 				<Route path="admin" element={ <AdminHome /> }></Route>
 				<Route path="admin/add-product" element={ <AddProduct /> }></Route>
-				<Route path="admin/edit-product/:index" element={ <EditProduct /> }></Route>
+				<Route path="admin/edit-product/:qnr" element={ <EditProduct /> }></Route>
 				<Route path="admin/maintain-products" element={ <MaintainProducts /> }></Route>
 				<Route path="admin/maintain-categories" element={ <MaintainCategories /> }></Route>
 				<Route path="admin/maintain-shops" element={ <MaintainShops /> }></Route>

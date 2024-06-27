@@ -10,6 +10,7 @@ function HomePage() {
 
 	return (
 		<div>
+			<h1>Home</h1>
 			{products.map(product =>
 				<div key={product.id}>
 					<img style={{width: "100px"}} src={product.image} alt="" />
