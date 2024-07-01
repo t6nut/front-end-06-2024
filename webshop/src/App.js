@@ -15,6 +15,8 @@ import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import NotFound from './pages/global/NotFound';
 import NavigationBar from './components/NavigationBar';
+import BookSupplier from './pages/admin/BookSupplier';
+import Supplier from './pages/admin/Supplier';
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
 				<Route path="admin/maintain-products" element={ <MaintainProducts /> }></Route>
 				<Route path="admin/maintain-categories" element={ <MaintainCategories /> }></Route>
 				<Route path="admin/maintain-shops" element={ <MaintainShops /> }></Route>
+				<Route path="admin/supplier" element={ <Supplier /> }></Route>
+				<Route path="admin/book-supplier" element={ <BookSupplier /> }></Route>
 
 				<Route path="login" element={ <Login /> }></Route>
 				<Route path="signup" element={ <Signup /> }></Route>

@@ -4,7 +4,7 @@ import producstJSON from "../../data/products.json";
 
 function EditProduct() {
 	const { qnr } = useParams();
-	const product = producstJSON[qnr];
+	const product = producstJSON[qnr]; // kasuta find()
 	const nameRef = useRef();
 	const categoryRef = useRef();
 	const priceRef = useRef();
@@ -26,6 +26,7 @@ function EditProduct() {
 			"price": Number(priceRef.current.value),
 			"image": imageRef.current.value,
 			// "active": activeRef.current.checked
+			// add rating same value, add description
 		}
 		producstJSON[qnr] = changedproduct;
 		navigate("/admin/maintain-products")
@@ -48,7 +49,6 @@ function EditProduct() {
 			<label htmlFor="">Product stock</label> <br />
 			{/* <input ref={activeRef} type="checkbox" defaultChecked={product.active} /><br /> */}
 			<button onClick={edit}>Update</button>
-			{/* Muutes ERROR - rate not defined? */}
 		</div>
 	)
 }

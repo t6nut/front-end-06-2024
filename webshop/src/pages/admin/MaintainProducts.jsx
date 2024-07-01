@@ -8,7 +8,9 @@ function MaintainProducts() {
 
 	const remove = (index) => {
 		productsJSON.splice(index, 1);
-		setProducts(productsJSON.splice());
+		setProducts(productsJSON.slice());
+		// kustutab, aga ei salvesta?
+		// add toastify
 	}
 
 	return (
@@ -33,7 +35,6 @@ function MaintainProducts() {
 							<td>{p.category}</td>
 							<td>{p.price}</td>
 							<td>
-								{/* Remove not working? */}
 								<button onClick={() => remove(index)}>Remove</button>
 								<Link to={"/admin/edit-product/" + index}>
 									<button>Edit</button>

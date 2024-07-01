@@ -5,8 +5,25 @@ import cartJSON from "../../data/cart.json"
 function HomePage() {
 	const [products, setProducts] = useState(productsFromFile);
 	const addToCart = (product) => {
-		cartJSON.push(product);
+		// cartJSON.push(product);
+
+		const cartLS = JSON.parse(localStorage.getItem("cart") || "[]");
+		cartLS.push(product);
+		localStorage.setItem("cart", JSON.stringify(cartLS));
+		// add toastify
+		// react-hot-toast
 	}
+
+	// mitu tk on n2htaval
+
+	// sorteeri A-Z
+	// sorteeri Z-A
+	// sorteeri hind kasvavalt
+	// sorteeri hind kahanevalt
+	// sorteeri reiting kasvavalt
+	// sorteeri reiting kahanevalt
+
+	// filtreeri kategooria algusel
 
 	return (
 		<div>
@@ -17,6 +34,7 @@ function HomePage() {
 					<div>{product.title}</div>
 					<div>{product.price}</div>
 					<button onClick={() => addToCart(product)}>Add to cart</button>
+					
 				</div>
 			)}
 		</div>

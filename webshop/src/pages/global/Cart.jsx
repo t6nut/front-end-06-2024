@@ -1,37 +1,40 @@
 import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import cartJSON from '../../data/cart.json'
+// import cartJSON from '../../data/cart.json'
 
 function Cart() {
-	const [cart, setCart] = useState(cartJSON.slice());
+	const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart") || "[]"));
 
 	const emptyCart = () => {
-		cartJSON.splice(0);
-		setCart(cartJSON.slice());
+		cart.splice(0);
+		setCart(cart.slice());
+		localStorage.setItem("cart", JSON.stringify(cart));
 	}
 
 	const addMore = (product) => {
-		cartJSON.push(product);
-		setCart(cartJSON.slice());
+		cart.push(product);
+		setCart(cart.slice()); // HTMLi uuendamiseks
+		localStorage.setItem("cart", JSON.stringify(cart)); // salvestamiseks
 	}
 
 	const removeProduct = (index) => {
-		cartJSON.splice(index, 1);
-		setCart(cartJSON.slice());
+		cart.splice(index, 1);
+		setCart(cart.slice());
+		localStorage.setItem("cart", JSON.stringify(cart));
 	}
 
 	const calculateCart = () => {
 		let cartSum = 0;
-		cartJSON.forEach(product => 
+		cart.forEach(product => 
 			cartSum += product.price
 		);
-		return cartSum; //TODO: ASK how to return multiple variables & use them below?
+		return cartSum.toFixed(2);
 	}
 
 	const countProducts = () => {
 		let cartCount = 0;
-		cartJSON.forEach(product =>
+		cart.forEach(product =>
 			cartCount++
 		);
 		return cartCount;
