@@ -1,7 +1,7 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
 import HomePage from './pages/global/HomePage'
-import ContactUs from './pages/global/ContactUs';
+import { ContactUs } from './pages/global/ContactUs';
 import Shops from './pages/global/Shops';
 import Cart from './pages/global/Cart';
 import SingleProduct from './pages/global/SingleProduct';
@@ -17,10 +17,37 @@ import NotFound from './pages/global/NotFound';
 import NavigationBar from './components/NavigationBar';
 import BookSupplier from './pages/admin/BookSupplier';
 import Supplier from './pages/admin/Supplier';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <div className="App">
+
+			<Toaster
+				position="top-center"
+				reverseOrder={false}
+				gutter={8}
+				containerClassName=""
+				containerStyle={{}}
+				toastOptions={{
+					// Define default options
+					className: '',
+					duration: 5000,
+					style: {
+						background: '#363636',
+						color: '#fff',
+					},
+
+					// Default options for specific types
+					success: {
+						duration: 3000,
+						theme: {
+							primary: 'green',
+							secondary: 'black',
+						},
+					},
+				}}
+			/>
 			<NavigationBar />
 			
       <Routes>
@@ -28,7 +55,7 @@ function App() {
 				<Route path="contact" element={ <ContactUs /> }></Route>
 				<Route path="shops" element={ <Shops /> }></Route>
 				<Route path="cart" element={ <Cart /> }></Route>
-				<Route path="product/:index" element={ <SingleProduct /> }></Route>
+				<Route path="product/:title" element={ <SingleProduct /> }></Route>
 
 				<Route path="admin" element={ <AdminHome /> }></Route>
 				<Route path="admin/add-product" element={ <AddProduct /> }></Route>

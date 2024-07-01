@@ -13,7 +13,7 @@ function YksToode() {
 	return (
 		<div>
 			<div>Toote nimi: {toode.nimi}</div>
-			<div>Toote nimi: {toode.hind}</div>
+			<div>Toote hind: {toode.hind}</div>
 			{toode.aktiivne ? 
 				<div>Toode on aktiivne</div> : 
 				<div>Toode pole aktiivne</div>}

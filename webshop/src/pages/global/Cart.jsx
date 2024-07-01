@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom'
 // import cartJSON from '../../data/cart.json'
 
@@ -16,12 +17,15 @@ function Cart() {
 		cart.push(product);
 		setCart(cart.slice()); // HTMLi uuendamiseks
 		localStorage.setItem("cart", JSON.stringify(cart)); // salvestamiseks
+		toast.success('1 more ' + product.title + ' added');
 	}
 
 	const removeProduct = (index) => {
+		toast.success('Product removed'); // kuidas lisada product.title toast sõnumisse?
 		cart.splice(index, 1);
 		setCart(cart.slice());
 		localStorage.setItem("cart", JSON.stringify(cart));
+		
 	}
 
 	const calculateCart = () => {

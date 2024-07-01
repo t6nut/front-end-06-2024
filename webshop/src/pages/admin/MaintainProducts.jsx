@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import productsJSON from "../../data/products.json";
 import { Link } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 function MaintainProducts() {
 
@@ -10,11 +11,12 @@ function MaintainProducts() {
 		productsJSON.splice(index, 1);
 		setProducts(productsJSON.slice());
 		// kustutab, aga ei salvesta?
-		// add toastify
+		toast.success('Product removed');
 	}
 
 	return (
 		<div>
+			<h1>Maintain products</h1>
 			<table>
 				<thead>
 					<tr>
@@ -35,7 +37,7 @@ function MaintainProducts() {
 							<td>{p.category}</td>
 							<td>{p.price}</td>
 							<td>
-								<button onClick={() => remove(index)}>Remove</button>
+								<button onClick={() => { remove(index); }}>Remove</button>
 								<Link to={"/admin/edit-product/" + index}>
 									<button>Edit</button>
 								</Link>
