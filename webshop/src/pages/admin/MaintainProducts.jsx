@@ -10,7 +10,6 @@ function MaintainProducts() {
 	const remove = (index) => {
 		productsJSON.splice(index, 1);
 		setProducts(productsJSON.slice());
-		// kustutab, aga ei salvesta?
 		toast.success('Product removed');
 	}
 
