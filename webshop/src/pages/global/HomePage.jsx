@@ -12,7 +12,6 @@ function HomePage() {
 		const cartLS = JSON.parse(localStorage.getItem("cart") || "[]");
 		cartLS.push(product);
 		localStorage.setItem("cart", JSON.stringify(cartLS));
-		// add toastify
 		toast.success(product.title + ' - added to cart' );
 		// react-hot-toast
 	}

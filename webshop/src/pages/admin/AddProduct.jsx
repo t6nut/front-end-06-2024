@@ -5,6 +5,7 @@ import productsJSON from '../../data/products.json';
 function AddProduct() {
 	// const [message, setMessage] = useState("Add product!");
 	const titleRef = useRef();
+	const categoryRef = useRef();
 	const descRef = useRef();
 	const priceRef = useRef();
 	const imageRef = useRef();
@@ -28,6 +29,7 @@ function AddProduct() {
 
 		const newProduct = {
 			'title': titleRef.current.value,
+			'category': categoryRef.current.value,
 			'description': descRef.current.value,
 			'price': Number(priceRef.current.value),
 			'image': imageRef.current.value,
@@ -56,6 +58,8 @@ function AddProduct() {
 			<h1>Add a new product</h1>
 			<label>Product name</label> <br />
 			<input ref={titleRef} type="text" /> <br />
+			<label>Product category</label> <br />
+			<input ref={categoryRef} type="text" /> <br />
 			<label>Product description</label> <br />
 			<textarea ref={descRef} type="text" /> <br />
 			<label>Product price</label> <br />
