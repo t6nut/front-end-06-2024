@@ -1,9 +1,10 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import toast from 'react-hot-toast';
 import productsJSON from '../../data/products.json';
 
 function AddProduct() {
 	// const [message, setMessage] = useState("Add product!");
+	const idRef = useRef();
 	const titleRef = useRef();
 	const categoryRef = useRef();
 	const descRef = useRef();
@@ -11,6 +12,7 @@ function AddProduct() {
 	const imageRef = useRef();
 	const ratingRef = useRef();
 	const activeRef = useRef();
+	const [isUnique, setIsUnique] = useState(true);
 
 	const add = () => {
 		if (titleRef.current.value === "") {
@@ -28,12 +30,16 @@ function AddProduct() {
 		toast.success("Product added: " + titleRef.current.value);
 
 		const newProduct = {
+			'id': Number(idRef.current.value),
 			'title': titleRef.current.value,
 			'category': categoryRef.current.value,
 			'description': descRef.current.value,
 			'price': Number(priceRef.current.value),
 			'image': imageRef.current.value,
-			'rating': ratingRef.current.value,
+			'rating': {
+				'rate': ratingRef.current.value,
+				'count': 0,
+			}
 		}
 
 		productsJSON.push(newProduct);
@@ -53,9 +59,21 @@ function AddProduct() {
 		toast.error("");
 	}
 
+	const checkIdUniqueness = () => {
+		const result = productsJSON.findIndex(p => p.id === Number(idRef.current.value));
+		if (result === -1) {
+			setIsUnique(true);
+		} else {
+			setIsUnique(false);
+		}
+	}
+
 	return (
 		<div>
+			{isUnique === false && <div>Produt ID is not Unique!</div>}
 			<h1>Add a new product</h1>
+			<label>Product id</label> <br />
+			<input onChange={checkIdUniqueness} ref={idRef} type="text" /> <br />
 			<label>Product name</label> <br />
 			<input ref={titleRef} type="text" /> <br />
 			<label>Product category</label> <br />
@@ -70,7 +88,7 @@ function AddProduct() {
 			<input onChange={test} ref={imageRef} type="text" /> <br />
 			<label>Product in stock</label> <br />
 			<input ref={activeRef} type="checkbox" /> <br />
-			<button onClick={add}>Add</button> <br />
+			<button disabled={isUnique === false} onClick={add}>Add</button> <br />
 		</div>
 	)
 }

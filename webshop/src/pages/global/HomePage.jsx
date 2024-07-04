@@ -6,13 +6,19 @@ import { Link } from 'react-router-dom';
 
 function HomePage() {
 	const [products, setProducts] = useState(productsFromFile);
-	const addToCart = (product) => {
+	const addToCart = (productClicked) => {
 		// cartJSON.push(product);
 
 		const cartLS = JSON.parse(localStorage.getItem("cart") || "[]");
-		cartLS.push(product);
+		const index = cartLS.findIndex(p => p.product.id === productClicked.id);
+		if (index >= 0) { // index !== -1
+			cartLS[index].quantity++;
+		} else {
+			cartLS.push({quantity: 1, product: productClicked});
+		}
+		
 		localStorage.setItem("cart", JSON.stringify(cartLS));
-		toast.success(product.title + ' - added to cart' );
+		toast.success(productClicked.title + ' - added to cart' );
 		// react-hot-toast
 	}
 

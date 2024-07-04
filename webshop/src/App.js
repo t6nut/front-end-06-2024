@@ -24,7 +24,7 @@ function App() {
     <div className="App">
 
 			<Toaster
-				position="top-center"
+				position="bottom-right"
 				reverseOrder={false}
 				gutter={8}
 				containerClassName=""
@@ -32,7 +32,7 @@ function App() {
 				toastOptions={{
 					// Define default options
 					className: '',
-					duration: 5000,
+					duration: 2000,
 					style: {
 						background: '#363636',
 						color: '#fff',
@@ -40,7 +40,7 @@ function App() {
 
 					// Default options for specific types
 					success: {
-						duration: 3000,
+						duration: 2000,
 						theme: {
 							primary: 'green',
 							secondary: 'black',

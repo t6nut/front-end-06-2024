@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 function AdminHome() {
 
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 	// return <h1>{t('Welcome to React')}</h1>
 
 	return (
