@@ -58,8 +58,8 @@ function Cart() {
 
 	const countProducts = () => {
 		let cartCount = 0;
-		cart.forEach(product =>
-			cartCount++
+		cart.forEach(p =>
+			cartCount += p.quantity
 		);
 		return cartCount;
 	}
