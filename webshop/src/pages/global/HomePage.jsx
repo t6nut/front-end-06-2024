@@ -89,7 +89,9 @@ function HomePage() {
 			<button onClick={sortRatingHigh}>Sort rating from high</button>
 			<button onClick={sortRatingLow}>Sort rating from low</button> <br /><br />
 			<h6>Filter by category:</h6>
-			<select onChange={filterByCategory} ref={searchedRef}>
+			{/* <input onChange={filterByCategory} ref={searchedRef} type="text" /> */}
+			<select defaultValue="" onChange={filterByCategory} ref={searchedRef}>
+				<option value="">--Select category--</option>
 				{[...categoryOptions].map((category) => 
 					<option key={category}>{category}</option> //reset filter?
 				)}
