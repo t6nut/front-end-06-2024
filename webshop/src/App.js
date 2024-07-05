@@ -76,3 +76,16 @@ function App() {
 }
 
 export default App;
+
+// 9.07 kell 9:00 - 12:15 alamkomponendid (props), makse, CSS moodulid
+// 12.07 kell 9:00 - 12:15 globaalne muutuja Context
+// Modal --> useImperativeHandle
+// Redux
+// TypeScript
+// Sisselogimine/Registreerumine --> Firebase
+// URLde blokeerimine -> globaalselt sisselogitud staatus
+// custom hookid
+// useMemo useCallback
+// re-renderdus
+// unit testid
+// Next.js ?

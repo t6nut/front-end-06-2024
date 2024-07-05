@@ -1,15 +1,27 @@
 import React, { useState, useRef, useEffect } from 'react'
-import productsFromFile from "../../data/products.json";
+// import productsFromFile from "../../data/products.json";
 // import cartJSON from "../../data/cart.json"
 import toast from 'react-hot-toast';
+import { Spinner } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 
 function HomePage() {
-	const [products, setProducts] = useState(productsFromFile);
-	const [productsDefault, setProductsDefault] = useState(productsFromFile);
-	const count = Object.keys(products).length;
-	// const [count, setCount] = useState(0);
+	const [loading, setLoading] = useState(true);
+	const [products, setProducts] = useState([]);
+	const [productsDefault, setProductsDefault] = useState([]);
 	const searchedRef = useRef();
+	const url = process.env.REACT_APP_PRODUCTS_DB_URL;
+
+	useEffect(() => {
+		fetch(url)
+		.then(res => res.json())
+		.then(json => {
+			setProducts(json || []);
+			setProductsDefault(json || []);
+			setLoading(false);
+		})
+	}, [url]);
+
 	const addToCart = (productClicked) => {
 		// cartJSON.push(product);
 
@@ -68,16 +80,9 @@ function HomePage() {
 		...productsDefault.map((p) => [p.category]),
 	]);
 
-
-	// mitu tk on n2htaval
-	// const countProducts = () => {
-	// 	let productCount = products.lenght();
-	// 	console.log("product count is: " + productCount);
-	// 	return productCount;
-	// }
-	useEffect(() => {
-		// toast.success("count changed!");
-	}, [count]);
+	if (loading) {
+		return <Spinner />
+	}
 
 	return (
 		<div>
@@ -97,7 +102,7 @@ function HomePage() {
 				)}
 			</select>
 			<br /><br />
-			<h6>There are currently {count} products found</h6>
+			<h6>There are currently {products.length} products found</h6>
 			<div className="products">
 				{products.map(product =>
 					<div className="product" key={product.id}>

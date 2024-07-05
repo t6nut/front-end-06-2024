@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
+import { Spinner } from 'react-bootstrap';
 import toast from 'react-hot-toast';
-import productsJSON from '../../data/products.json';
+// import productsJSON from '../../data/products.json';
 
 function AddProduct() {
 	// const [message, setMessage] = useState("Add product!");
@@ -13,6 +14,27 @@ function AddProduct() {
 	const ratingRef = useRef();
 	const activeRef = useRef();
 	const [isUnique, setIsUnique] = useState(true);
+	const [categories, setCategories] = useState([]);
+	const [products, setProducts] = useState([]);
+	const [loading, setLoading] = useState(true);
+
+	const categoriesDbUrl = process.env.REACT_APP_CATEGORIES_DB_URL;
+	const productsDbUrl = process.env.REACT_APP_PRODUCTS_DB_URL;
+
+	useEffect(() => {
+		fetch(categoriesDbUrl)
+			.then(res => res.json())
+			.then(json => 
+				setCategories(json || []),
+				setLoading(false)
+		);
+	}, [categoriesDbUrl]);
+
+	useEffect(() => {
+		fetch(productsDbUrl)
+			.then(res => res.json())
+			.then(json => setProducts(json || []));
+	}, [productsDbUrl]);
 
 	const add = () => {
 		if (titleRef.current.value === "") {
@@ -42,7 +64,8 @@ function AddProduct() {
 			}
 		}
 
-		productsJSON.push(newProduct);
+		products.push(newProduct);
+		fetch(productsDbUrl, {method: "PUT", body: JSON.stringify(products)});
 	}
 
 	const test = () => {
@@ -60,12 +83,16 @@ function AddProduct() {
 	}
 
 	const checkIdUniqueness = () => {
-		const result = productsJSON.findIndex(p => p.id === Number(idRef.current.value));
+		const result = products.findIndex(p => p.id === Number(idRef.current.value));
 		if (result === -1) {
 			setIsUnique(true);
 		} else {
 			setIsUnique(false);
 		}
+	}
+
+	if (loading) {
+		return <Spinner />
 	}
 
 	return (
@@ -77,7 +104,10 @@ function AddProduct() {
 			<label>Product name</label> <br />
 			<input ref={titleRef} type="text" /> <br />
 			<label>Product category</label> <br />
-			<input ref={categoryRef} type="text" /> <br />
+			{/* <input ref={categoryRef} type="text" /> <br /> */}
+			<select ref={categoryRef}>
+				{categories.map(category => <option key={category.name}>{category.name}</option>)}
+			</select><br />
 			<label>Product description</label> <br />
 			<textarea ref={descRef} type="text" /> <br />
 			<label>Product price</label> <br />

@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react'
+import { Spinner } from 'react-bootstrap';
 
 function Supplier() {
+	const [loading, setLoading] = useState(true);
 	const [products, setProducts] = useState([]);
 
 	// tehakse 1x useEffect sisu kui lehele tullakse
 	useEffect(() => {
 		fetch('https://fakestoreapi.com/products')
 			.then(response => response.json()) //kogu tagastus -> statuscode, headers
-			.then(json => setProducts(json)) // reaalne sisu mille lehelt saan
+			.then(json => 
+				setProducts(json),
+				setLoading(false)
+			) // reaalne sisu mille lehelt saan
+			
 	}, [])
 	/* dependency array -> sinna panen muutujad mille muutudes läheb
 	useEffect uuest käima */
+
+	if (loading) {
+		return <Spinner />
+	}
 
   return (
 		<div>

@@ -14,6 +14,8 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 function Map(props) {
 
+	// useEffect
+
 	return (
 		<div>
 
@@ -26,6 +28,7 @@ function Map(props) {
 				<Marker position={[59.4223, 24.7928]}>
 					<Popup>
 						Ülemiste keskus. <br /> Avatud 9-20
+						{/* Google URL */}
 					</Popup>
 				</Marker>
 				<Marker position={[59.4269, 24.7237]}>

@@ -4,7 +4,9 @@ import Map from '../../components/Map'
 
 function Shops() {
 	const [coordinates, setCoordinates] = useState({ lngLat: [59.4378, 24.7574], zoom: 11});
-	
+
+	// TODO: useEffect siin, võtta kõik poed
+
 	return (
 		<div>
 			<h1>Shops</h1>

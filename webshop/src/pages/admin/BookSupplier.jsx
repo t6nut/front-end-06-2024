@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { Spinner } from 'react-bootstrap';
 
 function BookSupplier() {
+	const [loading, setLoading] = useState(true);
 	const [books, setBooks] = useState([]);
 	const [searchValue, setSearchValue] = useState('react');
 	const searchRef = useRef();
@@ -8,7 +10,11 @@ function BookSupplier() {
 	useEffect(() => {
 		fetch('https://api.itbook.store/1.0/search/' + searchValue)
 			.then(res => res.json())
-			.then(json => setBooks(json.books));
+			.then(json => 
+				setBooks(json.books),
+				setLoading(false)
+			);
+				
 	}, [searchValue]);
 	
 	const changeSearchValue = () => {
@@ -16,6 +22,10 @@ function BookSupplier() {
 			return;
 		}
 		setSearchValue(searchRef.current.value);
+	}
+
+	if (loading) {
+		return <Spinner />
 	}
 
   return (

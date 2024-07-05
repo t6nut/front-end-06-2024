@@ -1,10 +1,13 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
+import { Spinner } from 'react-bootstrap';
 import { useNavigate, useParams } from "react-router-dom";
-import productsJSON from "../../data/products.json";
+// import productsJSON from "../../data/products.json";
 
 function EditProduct() {
+	const [loading, setLoading] = useState(true);
 	const { qnr } = useParams();
-	const product = productsJSON.find(p => p.id === Number(qnr)); // kasuta find()
+	const [products, setProducts] = useState([]);
+	const product = products.find(p => p.id === Number(qnr)); // kasuta find()
 	const idRef = useRef();
 	const titleRef = useRef();
 	const categoryRef = useRef();
@@ -16,6 +19,31 @@ function EditProduct() {
 	const activeRef = useRef();
 	const navigate = useNavigate();
 	const [isUnique, setIsUnique] = useState(true);
+	const [categories, setCategories] = useState([]);
+	
+
+	const categoriesDbUrl = process.env.REACT_APP_CATEGORIES_DB_URL;
+	const productsDbUrl = process.env.REACT_APP_PRODUCTS_DB_URL;
+
+	useEffect(() => {
+		fetch(categoriesDbUrl)
+			.then(res => res.json())
+			.then(json => 
+				setCategories(json || []),
+				setLoading(false)
+			);
+			
+	}, [categoriesDbUrl]);
+
+	useEffect(() => {
+		fetch(productsDbUrl)
+			.then(res => res.json())
+			.then(json => 
+				setProducts(json || []),
+				setLoading(false)
+		);
+			setLoading(false);
+	}, [productsDbUrl]);
 
 	// Reacti hookid - Reacti erikood
 	// 1. Peavad algama use eesliidesega
@@ -38,9 +66,11 @@ function EditProduct() {
 				"count": countRef.current.value
 			}
 		}
-		const index = productsJSON.findIndex(p => p.id === Number(qnr));
-		productsJSON[index] = changedproduct;
-		navigate("/admin/maintain-products")
+		const index = products.findIndex(p => p.id === Number(qnr));
+		products[index] = changedproduct;
+		fetch(productsDbUrl, {method: "PUT", body: JSON.stringify(products)})
+			.then(() => 
+				navigate("/admin/maintain-products"));
 	}
 	
 	const checkIdUniqueness = () => {
@@ -49,7 +79,7 @@ function EditProduct() {
 			return;
 		}
 
-		const result = productsJSON.findIndex(p => p.id === Number(idRef.current.value));
+		const result = products.findIndex(p => p.id === Number(idRef.current.value));
 		// -1 --> ei leitud 0,1,2,3,4 --> leiti
 		if (result === -1) { 
 			setIsUnique(true);
@@ -60,6 +90,10 @@ function EditProduct() {
 
 	if (product === undefined) {
 		return <div>product not fount</div>
+	}
+
+	if (loading) {
+		return <Spinner />
 	}
 
 	return (
@@ -76,7 +110,10 @@ function EditProduct() {
 			<label htmlFor="">Product description</label> <br />
 			<textarea style={{width: "500px"}} ref={descRef} type="text" defaultValue={product.description} /><br />
 			<label htmlFor="">Product category</label> <br />
-			<input ref={categoryRef} type="text" defaultValue={product.category} /><br />
+			{/* <input ref={categoryRef} type="text" defaultValue={product.category} /><br /> */}
+			<select ref={categoryRef} defaultValue={product.category}>
+				{categories.map(category => <option key={category.name}>{category.name}</option>)}
+			</select><br />
 			<label htmlFor="">Product price</label> <br />
 			<input ref={priceRef} type="number" defaultValue={product.price} /><br />
 			<label htmlFor="">Product image</label> <br />
