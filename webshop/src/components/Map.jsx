@@ -23,6 +23,9 @@ function Map(props) {
 					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
+
+				{/* props -> shops.map(shop => <Marker></Marker>) */}
+				
 				<Marker position={[59.4223, 24.7928]}>
 					<Popup>
 						Ülemiste keskus. <br /> Avatud 9-20

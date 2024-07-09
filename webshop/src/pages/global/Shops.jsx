@@ -38,7 +38,7 @@ function Shops() {
 			<button onClick={() => setCoordinates({ lngLat: [59.4277, 24.7193], zoom: 13 })}>Kristiine</button>
 			<button onClick={() => setCoordinates({ lngLat: [58.3779, 26.7305], zoom: 13 })}>Tasku</button> */}
 			
-			<Map mapCoordinates={coordinates} />
+			<Map shops={shops} mapCoordinates={coordinates} />
 		</div>
 	)
 }
