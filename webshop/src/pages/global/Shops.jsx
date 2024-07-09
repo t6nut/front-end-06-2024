@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
 import Map from '../../components/Map'
+import { Spinner } from 'react-bootstrap';
 
 
 function Shops() {
-	const [shops, setShops] = useState([{ lngLat: [59.4378, 24.7574], zoom: 11}]);
+	const [shops, setShops] = useState([]);
+	const [coordinates, setCoordinates] = useState({ lngLat: [59.4316, 24.7574], zoom: 7});
+	const [loading, setLoading] = useState(true);
 
 	// TODO: useEffect siin, võtta kõik poed
 	const url = process.env.REACT_APP_SHOPS_DB_URL;
@@ -13,16 +16,20 @@ function Shops() {
 			.then(res => res.json())
 	 		.then(json => {
 				setShops(json || []);
-	 			//setLoading(false);
+	 			setLoading(false);
 	 		})
 	 }, [url]);
+
+	if (loading) {
+		return <Spinner />
+	}
 
 	return (
 		<div>
 			<h1>Shops</h1>
 			{shops.map((shop, index) =>
 				<div key={shop.name}>
-					<button onClick={() => setShops({ lngLat: [shop.coordinates.lng, shop.coordinates.lat], zoom: 7 })}>{shop.name}</button>
+					<button onClick={() => setCoordinates({ lngLat: [shop.coordinates.lng, shop.coordinates.lat], zoom: 11 })}>{shop.name}</button>
 				</div>
 			)}
 			{/* <button onClick={() => setCoordinates({ lngLat: [58.8090, 25.4878], zoom: 7 })}>Kõik poed</button>
@@ -31,7 +38,7 @@ function Shops() {
 			<button onClick={() => setCoordinates({ lngLat: [59.4277, 24.7193], zoom: 13 })}>Kristiine</button>
 			<button onClick={() => setCoordinates({ lngLat: [58.3779, 26.7305], zoom: 13 })}>Tasku</button> */}
 			
-			<Map mapCoordinates={shops} />
+			<Map mapCoordinates={coordinates} />
 		</div>
 	)
 }
