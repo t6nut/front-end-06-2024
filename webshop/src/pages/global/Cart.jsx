@@ -1,23 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
+import ParcelMachines from '../../components/cart/ParcelMachines';
+import Payment from '../../components/cart/Payment';
+import styles from "../../css/Cart.module.css";
 // import cartJSON from '../../data/cart.json'
 
 function Cart() {
 	const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart") || "[]"));
-	const [pms, setPMs] = useState([]);
-	const [pmsOriginal, setPMsOriginal] = useState([]);
-	const searchRef = useRef();
-
-	useEffect(() => {
-		fetch('https://www.omniva.ee/locations.json')
-			.then(res => res.json())
-			.then(json => {
-				setPMs(json);
-				setPMsOriginal(json);
-			});
-	}, []);
-
 
 	const emptyCart = () => {
 		cart.splice(0);
@@ -64,26 +54,21 @@ function Cart() {
 		return cartCount;
 	}
 
-	const searchFromPMs = () => {
-		const result = pmsOriginal.filter(pm => 
-			pm.NAME.toLowerCase().includes(searchRef.current.value.toLowerCase())
-		);
-		setPMs(result);
-	}
-
 	return (
 		<div>
 			<h1>Cart</h1>
 			{cart.map((p, index) =>
-				<div key={p.product.id}>
-					<img className="image" src={p.product.image} alt="" />
-					<div>{p.product.title}</div>
-					<div>{p.product.price} €</div>
-					<button onClick={() => decreaseQuantity(index)}>-</button>
-					<div>{p.quantity} pcs</div>
-					<button onClick={() => increaseQuantity(index)}>+</button>
-					<div>{(p.product.price * p.quantity).toFixed(2)} €</div>
-					<button onClick={() => removeProduct(p.product)}>Remove</button>
+				<div className={styles.product} key={p.product.id}>
+					<img className={styles.image} src={p.product.image} alt="" />
+					<div className={styles.title}>{p.product.title}</div>
+					<div className={styles.price}>{p.product.price} €</div>
+					<div className={styles.quantity}>
+						<img src={require("../../images/minus.png")} className={styles.button} onClick={() => decreaseQuantity(index)} alt="" />
+						<div>{p.quantity} pcs</div>
+						<img src={require("../../images/plus.png")} className={styles.button} onClick={() => increaseQuantity(index)} alt="" />
+					</div>
+					<div className={styles.total} >{(p.product.price * p.quantity).toFixed(2)} €</div>
+					<img src={require("../../images/remove.png")} className={styles.button} onClick={() => removeProduct(p.product)} alt="" />
 				</div>
 			)}
 
@@ -93,16 +78,13 @@ function Cart() {
 
 			{cart.length > 0 && 
 				<div>
-						<div>Cart count: {countProducts()}</div>
-						<div>Cart sum: {calculateCart()}</div>
-						<button onClick={emptyCart}>Empty cart</button>
-						<br />
-						<input onChange={searchFromPMs} ref={searchRef} type="text" />
-						<select>
-							{pms
-								.filter(pm => pm.A0_NAME === "EE")
-								.map(pm => <option key={pm.NAME}>{pm.NAME}</option>)}
-						</select>
+					<div>Cart count: {countProducts()}</div>
+					<div>Cart sum: {calculateCart()}</div>
+					<Payment sum={calculateCart()}/>
+					<br />
+					<button onClick={emptyCart}>Empty cart</button>
+					<br />
+					<ParcelMachines />
 				</div>
 			}
 

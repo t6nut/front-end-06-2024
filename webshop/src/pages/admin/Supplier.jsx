@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Spinner } from 'react-bootstrap';
+import Payment from '../../components/cart/Payment';
 
 function Supplier() {
 	const [loading, setLoading] = useState(true);
@@ -24,6 +25,7 @@ function Supplier() {
 
   return (
 		<div>
+			<Payment sum={200} />
 			<h1>Supplier</h1>
 			<table>
 				<thead>
