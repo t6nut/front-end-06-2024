@@ -25,8 +25,12 @@ function Map(props) {
 				/>
 
 				{/* props -> shops.map(shop => <Marker></Marker>) */}
-				
-				<Marker position={[59.4223, 24.7928]}>
+				{props.shops.map(shop => 
+					<Marker position={[shop.coordinates.lng, shop.coordinates.lat]}>
+						{shop.name}
+					</Marker>
+				)}
+				{/* <Marker position={[59.4223, 24.7928]}>
 					<Popup>
 						Ülemiste keskus. <br /> Avatud 9-20
 					</Popup>
@@ -40,7 +44,7 @@ function Map(props) {
 					<Popup>
 						Tasku keskus. <br /> Avatud 9-21
 					</Popup>
-				</Marker>
+				</Marker> */}
 			</MapContainer>
 		</div>)
 }
