@@ -16,3 +16,8 @@ a {
 tr td:first-of-type {
 	font-weight: bold;
 }
+
+.low-stock {
+	color: red!important;
+	font-weight: bold;
+}

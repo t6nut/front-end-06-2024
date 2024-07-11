@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 
 function Products() {
@@ -30,6 +30,14 @@ function Products() {
     setProducts(products.slice());
   }
 
+	useEffect(() => {
+		const sortPriceRising = () => {
+			products.sort((a, b) => a.price - b.price);
+			setProducts(products.slice());
+		}
+		sortPriceRising();
+	}, []);
+	
   return (<div>
     <div className="container">
       <h2 className="mb-4">Products</h2>
@@ -49,7 +57,7 @@ function Products() {
               <td>{product.name}</td>
               <td>{product.price}</td>
               {/*  TODO: Display the quantity in red if it is lower than 3 */}
-              <td>{product.quantity}</td> 
+						<td className={ product.quantity <= 3 ? "low-stock" : "default" }>{product.quantity}</td> 
               <td>{product.store}</td>
             </tr>
           )}
