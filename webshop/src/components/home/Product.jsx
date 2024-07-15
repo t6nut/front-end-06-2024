@@ -1,8 +1,12 @@
 import React from 'react'
+import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { CartSumContext } from '../../store/CartSumContext';
 
 function Product({product}) {
+	const { cartSum, setCartSum } = useContext(CartSumContext);
+
 	const addToCart = (productClicked) => {
 		// cartJSON.push(product);
 		const cartLS = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -15,6 +19,7 @@ function Product({product}) {
 
 		localStorage.setItem("cart", JSON.stringify(cartLS));
 		toast.success(productClicked.title + ' - added to cart');
+		setCartSum(cartSum + productClicked.price);
 	}
 
 	return (

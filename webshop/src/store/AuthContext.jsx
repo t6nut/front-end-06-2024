@@ -1,0 +1,52 @@
+import React, { createContext, useState } from 'react';
+import { useEffect } from 'react';
+
+// Create a Context for the app
+export const AuthContext = createContext();
+
+// Create a provider component
+export const AuthProvider = ({ children }) => {
+	// State that will be shared in the context
+	const url = 'https://securetoken.googleapis.com/v1/token?key=AIzaSyDErnzKscfWiyqd-VWyAIxGvLjuGCBco2g';
+	const [loggedIn, setLoggedIn] = useState(false);
+	const [error, setError] = useState("");
+	const [fetching, setFetching] = useState(true);
+
+	useEffect(() => {
+		determineIfLoggedIn();
+	}, []);
+	
+	function determineIfLoggedIn() {
+		if (sessionStorage.getItem("refreshToken") !== null) {
+			const payload = {
+				"grant_type": "refresh_token",
+				"refresh_token": sessionStorage.getItem("refreshToken")
+			}
+			
+			fetch(url, { method: "POST", body: JSON.stringify(payload), headers: { "Content-Type": "application/json" } })
+				.then(res => res.json())
+				.then(json => {
+					setFetching(false);
+					if (json.error === undefined) {
+						sessionStorage.setItem("idToken", json.id_token);
+						setLoggedIn(true);
+					} else {
+						console.log(json);
+						setError(json.error.message);
+						setLoggedIn(false);
+						sessionStorage.clear();
+					}
+				})
+		} else {
+			setLoggedIn(false);
+			sessionStorage.clear();
+			setFetching(false);
+		}
+	}
+
+	return (
+		<AuthContext.Provider value={{ loggedIn, setLoggedIn, error, fetching, setError }}>
+			{children}
+		</AuthContext.Provider>
+	);
+};

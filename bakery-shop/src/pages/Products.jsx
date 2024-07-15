@@ -29,14 +29,9 @@ function Products() {
     products.push(newProduct);
     setProducts(products.slice());
   }
+	
+	products.sort((a, b) => a.price - b.price);
 
-	useEffect(() => {
-		const sortPriceRising = () => {
-			products.sort((a, b) => a.price - b.price);
-			setProducts(products.slice());
-		}
-		sortPriceRising();
-	}, []);
 	
   return (<div>
     <div className="container">

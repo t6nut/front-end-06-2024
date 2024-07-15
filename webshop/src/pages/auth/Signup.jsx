@@ -1,22 +1,59 @@
+import { useState } from 'react';
+import { useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../store/AuthContext';
+import { useContext } from 'react';
 
 function SignUp() {
+	const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDErnzKscfWiyqd-VWyAIxGvLjuGCBco2g'; //env kaudu
+	const emailRef = useRef();
+	const passwordRef = useRef();
+	const [message, setMessage] = useState('');
+	const navigate = useNavigate();
+	const { setLoggedIn } = useContext(AuthContext);
+
+	const signup = (event) => {
+		event.preventDefault();
+
+		const payload = {
+			email: emailRef.current.value,
+			password: passwordRef.current.value,
+			returnSecureToken: true
+		}
+		fetch(url, {method: "POST", body: JSON.stringify(payload), headers: {"Content-Type" : "application/json"} })
+			.then(res => res.json())
+			.then(json => {
+				//console.log(json.error.message);
+				if (json.error === undefined) {
+					setMessage("");
+					navigate("/admin");
+					sessionStorage.setItem("idToken", json.idToken);
+					sessionStorage.setItem("refreshToken", json.refreshToken);
+					setLoggedIn(true);
+				} else {
+					setMessage(json.error.message);
+				}
+			})
+	}
+
 	return (
 		<div className='signup-form'>
 			<h1>Sign up</h1>
-			<Form>
+			<div style={{color: "red", backgroundColor: "pink", borderRadius: "10px"}}>{message}</div>
+			<Form onSubmit={signup}>
 				<Row className="mb-3">
 					<Form.Group as={Col} controlId="formGridEmail">
 						<Form.Label>Email</Form.Label>
-						<Form.Control type="email" placeholder="Enter email" />
+						<Form.Control ref={emailRef} type="email" placeholder="Enter email" />
 					</Form.Group>
 
 					<Form.Group as={Col} controlId="formGridPassword">
 						<Form.Label>Password</Form.Label>
-						<Form.Control type="password" placeholder="Password" />
+						<Form.Control ref={passwordRef} type="password" placeholder="Password" />
 					</Form.Group>
 				</Row>
 

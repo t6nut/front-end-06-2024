@@ -1,28 +1,26 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 // import productsJSON from "../../data/products.json";
 import { Link } from "react-router-dom";
 import toast from 'react-hot-toast';
-import { Button, Modal, Spinner } from 'react-bootstrap'
+import { Spinner } from 'react-bootstrap'
 import styles from "../../css/MaintainProducts.module.css"; // "module" local import
+import ConfirmationModal from '../../components/ConfirmationModal';
 
 // let toBeDeleted = null;
+
+// props ehk child-parent komponentidega suhtlus
+// parent --> child   parentist saadame muutujaid, et neist infot saada
+// child --> parent 	parentist saadame funktsiooni, et child saaks käima parentis panna
 
 function MaintainProducts() {
 
 	const [loading, setLoading] = useState(true);
 	const [products, setProducts] = useState([]);
 	const [productsDefault, setProductsDefault] = useState([]);
-	const [show, setShow] = useState(false);
 	const searchedRef = useRef();
-	const toBeDeletedRef = useRef();
+	const childRef = useRef();
 
 	const url = process.env.REACT_APP_PRODUCTS_DB_URL;
-
-	const handleClose = () => setShow(false);
-	const handleShow = (p) => {
-		setShow(true);
-		toBeDeletedRef.current = p;
-	};
 
 	useEffect(() => {
 		fetch(url)
@@ -34,15 +32,16 @@ function MaintainProducts() {
 			})
 	}, [url]);
 
-	const remove = () => {
-		console.log(toBeDeletedRef);
-		const index = productsDefault.findIndex(p => p.id === toBeDeletedRef.current.id);
+	const remove = (product) => {
+		//console.log(toBeDeletedRef);
+		const index = productsDefault.findIndex(p => p.id === product.id);
 		productsDefault.splice(index, 1);
 		// setProducts(productsDefault.slice());
 		searchFromProducts();
 		toast.success('Product removed');
-		setShow(false);
+		childRef.current.closeModal();
 		// fetch(url, {method: "PUT", body: JSON.stringify(productsDefault)})
+		//	.then()
 	}
 
 	const searchFromProducts = () => {
@@ -86,7 +85,7 @@ function MaintainProducts() {
 							<td>{p.description}</td>
 							<td>{p.price}</td>
 							<td>
-								<button onClick={() => { handleShow(p) }}>Remove</button>
+								<button onClick={() => childRef.current.handleShow(p) }>Remove</button>
 								<Link to={"/admin/edit-product/" + p.id}>
 									<button>Edit</button>
 								</Link>
@@ -95,21 +94,8 @@ function MaintainProducts() {
 					)}
 				</tbody>
 			</table>
-
-			<Modal show={show} onHide={handleClose}>
-				<Modal.Header closeButton>
-					<Modal.Title>Modal heading</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-				<Modal.Footer>
-					<Button variant="secondary" onClick={handleClose}>
-						Close
-					</Button>
-					<Button variant="primary" onClick={() => remove() }>
-						Save Changes
-					</Button>
-				</Modal.Footer>
-			</Modal>
+			
+			<ConfirmationModal ref={childRef} remove={remove} />
 
 		</div>
 	)

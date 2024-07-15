@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom'
 import ParcelMachines from '../../components/cart/ParcelMachines';
 import Payment from '../../components/cart/Payment';
 import styles from "../../css/Cart.module.css";
+import { useContext } from 'react';
+import { CartSumContext } from '../../store/CartSumContext';
 // import cartJSON from '../../data/cart.json'
 
 function Cart() {
 	const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart") || "[]"));
+	const {setCartSum} = useContext(CartSumContext);
 
 	const emptyCart = () => {
 		cart.splice(0);
@@ -22,12 +25,14 @@ function Cart() {
 		}
 		setCart(cart.slice());
 		localStorage.setItem("cart", JSON.stringify(cart));
+		setCartSum(calculateCart());
 	}
 
 	const increaseQuantity = (index) => {
 		cart[index].quantity++;
 		setCart(cart.slice());
 		localStorage.setItem("cart", JSON.stringify(cart));
+		setCartSum(calculateCart());
 	}
 
 	const removeProduct = (index) => {
@@ -35,7 +40,7 @@ function Cart() {
 		cart.splice(index, 1);
 		setCart(cart.slice());
 		localStorage.setItem("cart", JSON.stringify(cart));
-		
+		setCartSum(calculateCart());
 	}
 
 	const calculateCart = () => {
@@ -43,7 +48,7 @@ function Cart() {
 		cart.forEach(p => 
 			cartSum += p.product.price * p.quantity
 		);
-		return cartSum.toFixed(2);
+		return cartSum;
 	}
 
 	const countProducts = () => {
@@ -79,7 +84,7 @@ function Cart() {
 			{cart.length > 0 && 
 				<div>
 					<div>Cart count: {countProducts()}</div>
-					<div>Cart sum: {calculateCart()}</div>
+					<div>Cart sum: {calculateCart().toFixed(2)}</div>
 					<Payment sum={calculateCart()}/>
 					<br />
 					<button onClick={emptyCart}>Empty cart</button>

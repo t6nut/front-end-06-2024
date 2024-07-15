@@ -7,12 +7,18 @@ import './i18n';
 import App from './App';
 
 import { BrowserRouter } from "react-router-dom";
+import { CartSumProvider } from './store/CartSumContext';
+import { AuthProvider } from './store/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<BrowserRouter>
 		<React.StrictMode>
-			<App />
+			<CartSumProvider>
+				<AuthProvider>
+					<App />
+				</AuthProvider>
+			</CartSumProvider>
 		</React.StrictMode>
 	</BrowserRouter>
 );
