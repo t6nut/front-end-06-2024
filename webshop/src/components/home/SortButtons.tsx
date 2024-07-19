@@ -1,10 +1,8 @@
 import { Product } from '../../models/Product';
 
 interface SortButtonsInterface {
-	a: string,
-	b: string,
 	products: Product[],
-	setProducts: any,
+	setProducts: (products: Product[]) => void,
 }
 function SortButtons(props: SortButtonsInterface) {
 	// sorteeri A-Z

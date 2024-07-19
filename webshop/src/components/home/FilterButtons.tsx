@@ -2,14 +2,12 @@ import { useRef } from 'react'
 import { Product } from '../../models/Product';
 
 interface FilterButtonsInterface {
-	products: Product[],
 	productsDefault: Product[],
-	setProducts: any,
-	p: any
+	setProducts: (products: Product[]) => void,
 }
 
 const FilterButtons = (props: FilterButtonsInterface) => {
-	const searchedRef = useRef<HTMLInputElement>(null);
+	const searchedRef = useRef<HTMLSelectElement>(null);
 
 	// filtreeri kategooria algusel
 	const filterByCategory = () => {
@@ -23,9 +21,7 @@ const FilterButtons = (props: FilterButtonsInterface) => {
 		props.setProducts(result);
 	}
 
-	const categoryOptions = new Map([
-		...props.productsDefault.map((p) => [p.category]),
-	]);
+	const categoryOptions = [...new Set(props.productsDefault.map((p) => p.category))];
 
 	return (
 		<div>
@@ -33,7 +29,7 @@ const FilterButtons = (props: FilterButtonsInterface) => {
 			{/* <input onChange={filterByCategory} ref={searchedRef} type="text" /> */}
 			<select defaultValue="" onChange={filterByCategory} ref={searchedRef}>
 				<option value="">--Select category--</option>
-				{[...categoryOptions].map((category) =>
+				{categoryOptions.map((category) =>
 					<option key={category}>{category}</option> //reset filter?
 				)}
 			</select>

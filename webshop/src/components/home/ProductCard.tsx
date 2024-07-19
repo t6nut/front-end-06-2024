@@ -5,14 +5,16 @@ import { Link } from 'react-router-dom';
 import { CartSumContext } from '../../store/CartSumContext';
 import { useDispatch } from 'react-redux';
 import { increment } from '../../store/counterSlice';
+import { Product } from '../../models/Product';
+import { CartProduct } from '../../models/CartProduct';
 
-function Product({product}) {
+function ProductCard ({product}: {product: Product}) {
 	const { cartSum, setCartSum } = useContext(CartSumContext);
 	const dispatch = useDispatch();
 
-	const addToCart = (productClicked) => {
+	const addToCart = (productClicked: Product) => {
 		// cartJSON.push(product);
-		const cartLS = JSON.parse(localStorage.getItem("cart") || "[]");
+		const cartLS: CartProduct[] = JSON.parse(localStorage.getItem("cart") || "[]");
 		const index = cartLS.findIndex(p => p.product.id === productClicked.id);
 		if (index >= 0) { // index !== -1
 			cartLS[index].quantity++;
@@ -39,4 +41,4 @@ function Product({product}) {
 	)
 }
 
-export default Product
+export default ProductCard

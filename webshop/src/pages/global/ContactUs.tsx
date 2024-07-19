@@ -3,10 +3,14 @@ import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
 
 export const ContactUs = () => {
-	const form = useRef();
+	const form = useRef<HTMLFormElement>(null);
 
 	const sendEmail = (e: any) => {
 		e.preventDefault();
+
+		if (form.current === null) {
+			return;
+		}
 
 		emailjs
 			.sendForm('service_4kqtz04', 'template_blapspn', form.current, {

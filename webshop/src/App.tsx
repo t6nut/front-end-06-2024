@@ -17,11 +17,11 @@ import NotFound from './pages/global/NotFound';
 import NavigationBar from './components/NavigationBar';
 import BookSupplier from './pages/admin/BookSupplier';
 import Supplier from './pages/admin/Supplier';
-import { Toaster } from 'react-hot-toast';
 import { AuthContext } from './store/AuthContext';
 import { useContext } from 'react';
 import { Spinner } from 'react-bootstrap';
 import MaintainPictures from './pages/admin/MaintainPictures';
+import HotToast from './components/HotToast';
 
 function App() {
 	const { loggedIn, fetching, error, setError } = useContext(AuthContext);
@@ -41,31 +41,7 @@ function App() {
   return (
     <div className="App">
 
-			<Toaster
-				position="bottom-right"
-				reverseOrder={false}
-				gutter={8}
-				containerClassName=""
-				containerStyle={{}}
-				toastOptions={{
-					// Define default options
-					className: '',
-					duration: 2000,
-					style: {
-						background: '#363636',
-						color: '#fff',
-					},
-
-					// Default options for specific types
-					success: {
-						duration: 2000,
-						theme: {
-							primary: 'green',
-							secondary: 'black',
-						},
-					},
-				}}
-			/>
+			<HotToast/>
 			<NavigationBar />
 			
       <Routes>
@@ -105,12 +81,18 @@ export default App;
 // 12.07 kell 9:00 - 12:15 globaalne muutuja Context
 // Modal --> useImperativeHandle
 // Sisselogimine/Registreerumine --> Firebase
-// URLde blokeerimine -> globaalselt sisselogitud staatus
-
+// URLde blokeerimine -> globaalselt sisselogitud staatu
 // Redux
 // TypeScript
-// custom hookid
-// useMemo useCallback
-// re-renderdus
-// unit testid
-// Next.js ?
+
+// 10. custom hookid
+// 11. useMemo useCallback
+// 11. re-renderdus
+// 12. unit testid
+// 12. Next.js ?
+// 13. 
+// 14.
+// 15.
+// 16.
+// 17.
+// 18. lõpuprojekti esitlemine

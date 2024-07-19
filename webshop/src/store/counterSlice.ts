@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { CartProduct } from '../models/CartProduct'
 
 export const counterSlice = createSlice({
 	name: 'counter',
@@ -27,7 +28,7 @@ export const counterSlice = createSlice({
 })
 
 function determineInitialValue() {
-	const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+	const cart: CartProduct[] = JSON.parse(localStorage.getItem("cart") || "[]");
 	let cartCount = 0;
 	cart.forEach(p =>
 		cartCount += p.quantity

@@ -1,9 +1,14 @@
-import React, { forwardRef, useState, useImperativeHandle, useRef } from 'react'
+import { forwardRef, useState, useImperativeHandle, useRef } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { Product, Rating } from '../models/Product';
 
-interface ConfirmationModalInterface {
-	remove: (product: any) => {}
+export interface ConfirmationModalInterface {
+	remove: (product: Product) => void
+}
+
+export interface ConfirmationModalRefInterface {
+	closeModal: () => void
+	handleShow: (p: Product) => void
 }
 
 const ConfirmationModal = forwardRef((props: ConfirmationModalInterface, ref) => {

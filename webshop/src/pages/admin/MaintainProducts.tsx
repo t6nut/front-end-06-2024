@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import toast from 'react-hot-toast';
 import { Spinner } from 'react-bootstrap'
 import styles from "../../css/MaintainProducts.module.css"; // "module" local import
-import ConfirmationModal from '../../components/ConfirmationModal';
+import ConfirmationModal, { ConfirmationModalRefInterface } from '../../components/ConfirmationModal';
 import { Product } from '../../models/Product';
 
 // let toBeDeleted = null;
@@ -14,12 +14,11 @@ import { Product } from '../../models/Product';
 // child --> parent 	parentist saadame funktsiooni, et child saaks käima parentis panna
 
 function MaintainProducts() {
-
-	const [loading, setLoading] = useState(true);
 	const [products, setProducts] = useState<Product[]>([]);
 	const [productsDefault, setProductsDefault] = useState<Product[]>([]);
+	const [loading, setLoading] = useState(true);
 	const searchedRef = useRef<HTMLInputElement>(null);
-	const childRef = useRef<HTMLInputElement>(null);
+	const childRef = useRef<ConfirmationModalRefInterface>(null);
 
 	const url = process.env.REACT_APP_PRODUCTS_DB_URL;
 
@@ -36,7 +35,7 @@ function MaintainProducts() {
 			})
 	}, [url]);
 
-	const remove = (product: any) => {
+	const remove = (product: Product) => {
 		//console.log(toBeDeletedRef);
 		const index = productsDefault.findIndex(p => p.id === product.id);
 		productsDefault.splice(index, 1);
@@ -47,12 +46,11 @@ function MaintainProducts() {
 		
 		fetch(url, {method: "PUT", body: JSON.stringify(productsDefault)})
 			.then(() => {
-				if (!closeModal() || childRef.current === null) {
-					return;
-				}
 				searchFromProducts();
 				toast.success('Product removed');
-				childRef.current.closeModal();
+				if (childRef.current !== null) {
+					childRef.current.closeModal();
+				}
 			})
 	}
 	
@@ -67,6 +65,13 @@ function MaintainProducts() {
 			product.id.toString().includes(idSearch.value)
 		);
 		setProducts(result);
+	}
+
+	const showModal = (p: Product) => {
+		if (childRef.current === null) {
+			return;
+		}
+		childRef.current.handleShow(p);
 	}
 
 	if (loading) {
@@ -100,16 +105,12 @@ function MaintainProducts() {
 							<td>{p.category}</td>
 							<td>{p.description}</td>
 							<td>{p.price}</td>
-							{ childRef.current !== null ?
-								<td>
-									<button onClick={() => childRef.current.handleShow(p) }>Remove</button>
-									<Link to={"/admin/edit-product/" + p.id}>
-										<button>Edit</button>
-									</Link>
-								</td> 
-								:
-								<div> No child</div>
-							}
+							<td>
+								<button onClick={() =>showModal(p) }>Remove</button>
+								<Link to={"/admin/edit-product/" + p.id}>
+									<button>Edit</button>
+								</Link>
+							</td> 
 						</tr>
 					)}
 				</tbody>
