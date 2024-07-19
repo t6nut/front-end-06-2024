@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import toast from 'react-hot-toast';
 import { Category } from '../../models/Category';
 import { Product } from '../../models/Product';
+import useFetchProducts from '../../util/useFetchProducts';
 // import productsJSON from '../../data/products.json';
 
 function AddProduct() {
@@ -16,19 +17,9 @@ function AddProduct() {
 	const activeRef = useRef<HTMLInputElement>(null);
 	const [isUnique, setIsUnique] = useState<boolean>(true);
 	const [categories, setCategories] = useState<Category[]>([]);
-	const [products, setProducts] = useState<Product[]>([]);
-
 	const productsDbUrl = process.env.REACT_APP_PRODUCTS_DB_URL;
 	const categoriesDbUrl = process.env.REACT_APP_CATEGORIES_DB_URL;
-
-	useEffect(() => {
-		if (productsDbUrl === undefined) {
-			return;
-		}
-		fetch(productsDbUrl)
-			.then(res => res.json())
-			.then(json => setProducts(json || []));
-	}, [productsDbUrl]);
+	const {products} = useFetchProducts();
 
 	useEffect(() => {
 		if (categoriesDbUrl === undefined) {

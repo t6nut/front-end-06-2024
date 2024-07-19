@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
+import { SyntheticEvent, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
 
 export const ContactUs = () => {
 	const form = useRef<HTMLFormElement>(null);
 
-	const sendEmail = (e: any) => {
+	const sendEmail = (e: SyntheticEvent) => {
 		e.preventDefault();
 
 		if (form.current === null) {

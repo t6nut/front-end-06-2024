@@ -1,25 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react'
+import { useRef } from 'react'
 import { Spinner } from 'react-bootstrap';
-import { Category } from '../../models/Category';
+import useFetchCategories from '../../util/useFetchCategories';
 
 function MaintainCategories() {
-	const [loading, setLoading] = useState(true);
-	const [categories, setCategories] = useState<Category[]>([]);
+	const { categories, setCategories, loading, url } = useFetchCategories();
 	const categoryRef = useRef<HTMLInputElement>(null);
-	const url = process.env.REACT_APP_CATEGORIES_DB_URL;
-
-	useEffect(() => {
-		if (url === undefined) {
-			return;
-		}
-		fetch(url)
-			.then(res => res.json())
-			.then(json => {
-				setCategories(json || [])
-				setLoading(false)
-			}
-		);
-	}, [url]);
+	//const url = process.env.REACT_APP_CATEGORIES_DB_URL;
 	
 	const deleteCategory = (index: number) => {
 		if (url === undefined) {

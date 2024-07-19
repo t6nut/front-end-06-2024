@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import { useRef } from 'react'
 // import productsJSON from "../../data/products.json";
 import { Link } from "react-router-dom";
 import toast from 'react-hot-toast';
@@ -6,6 +6,7 @@ import { Spinner } from 'react-bootstrap'
 import styles from "../../css/MaintainProducts.module.css"; // "module" local import
 import ConfirmationModal, { ConfirmationModalRefInterface } from '../../components/ConfirmationModal';
 import { Product } from '../../models/Product';
+import useFetchProducts from '../../util/useFetchProducts';
 
 // let toBeDeleted = null;
 
@@ -14,26 +15,9 @@ import { Product } from '../../models/Product';
 // child --> parent 	parentist saadame funktsiooni, et child saaks käima parentis panna
 
 function MaintainProducts() {
-	const [products, setProducts] = useState<Product[]>([]);
-	const [productsDefault, setProductsDefault] = useState<Product[]>([]);
-	const [loading, setLoading] = useState(true);
+	const { products, productsDefault, loading, setProducts, url } = useFetchProducts();
 	const searchedRef = useRef<HTMLInputElement>(null);
 	const childRef = useRef<ConfirmationModalRefInterface>(null);
-
-	const url = process.env.REACT_APP_PRODUCTS_DB_URL;
-
-	useEffect(() => {
-		if (url === undefined) {
-			return;
-		}
-		fetch(url)
-			.then(res => res.json())
-			.then(json => {
-				setProducts(json || []);
-				setProductsDefault(json || []);
-				setLoading(false);
-			})
-	}, [url]);
 
 	const remove = (product: Product) => {
 		//console.log(toBeDeletedRef);
@@ -96,7 +80,7 @@ function MaintainProducts() {
 					</tr>
 				</thead>
 				<tbody>
-					{products.map((p, index) =>
+					{products.map((p) =>
 						<tr key={p.id} className={p.active ? styles.active : styles.inactive }>
 							<td>{p.id}</td>
 							<td>{p.rating.rate}/{p.rating.count}</td> 

@@ -1,5 +1,6 @@
-import React, { createContext, PropsWithChildren, useState } from 'react';
-import { CartProduct } from '../models/CartProduct';
+import { createContext, PropsWithChildren, useState } from 'react';
+import { calculateCart } from '../util/calculations';
+import { CartProductId } from '../models/CartProductId';
 
 // Create a Context for the app
 export const CartSumContext = createContext(
@@ -15,12 +16,9 @@ export const CartSumProvider = ({ children }: PropsWithChildren) => {
 	const [cartSum, setCartSum] = useState(calculateCartSum());
 
 	function calculateCartSum() {
-		const cartLS: CartProduct[] = JSON.parse(localStorage.getItem("cart") || "[]");
-		let cartSum = 0;
-		cartLS.forEach(p =>
-			cartSum += p.product.price * p.quantity
-		);
-		return cartSum;
+		/* const cartLS: CartProductId[] = JSON.parse(localStorage.getItem("cart") || "[]");
+		return calculateCart(cartLS); */
+		return 12;
 	}
 
 	return (

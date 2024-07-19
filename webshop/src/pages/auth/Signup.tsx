@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -16,7 +16,7 @@ function SignUp() {
 	const navigate = useNavigate();
 	const { setLoggedIn } = useContext(AuthContext);
 
-	const signup = (event: any) => {
+	const signup = (event: SyntheticEvent) => {
 		event.preventDefault();
 		if (emailRef.current === null || passwordRef.current === null) {
 			return;

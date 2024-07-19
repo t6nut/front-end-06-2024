@@ -1,28 +1,12 @@
-import React, { useEffect, useState } from 'react'
 import { Spinner } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
-import { Product } from '../../models/Product';
+import useFetchProducts from '../../util/useFetchProducts';
 // import productsJSON from '../../data/products.json'
 
 function SingleProduct() {
-	const [loading, setLoading] = useState(true);
 	const { title } = useParams();
-	const [products, setProducts] = useState<Product[]>([]);
+	const { products, loading} = useFetchProducts();
 	const product = products.find(p => p.title.toLowerCase().replaceAll(" ", "-") === title);
-	const productsDbUrl = process.env.REACT_APP_PRODUCTS_DB_URL;
-
-	useEffect(() => {
-		if (productsDbUrl === undefined) {
-			return
-		}
-		fetch(productsDbUrl)
-			.then(res => res.json())
-			.then(json => {
-				setProducts(json || [])
-				setLoading(false)
-			}
-		);
-	}, [productsDbUrl]);
 
 	if (loading) {
 		return <Spinner />

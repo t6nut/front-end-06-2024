@@ -6,7 +6,7 @@ import { CartSumContext } from '../../store/CartSumContext';
 import { useDispatch } from 'react-redux';
 import { increment } from '../../store/counterSlice';
 import { Product } from '../../models/Product';
-import { CartProduct } from '../../models/CartProduct';
+import { CartProductId } from '../../models/CartProductId';
 
 function ProductCard ({product}: {product: Product}) {
 	const { cartSum, setCartSum } = useContext(CartSumContext);
@@ -14,12 +14,12 @@ function ProductCard ({product}: {product: Product}) {
 
 	const addToCart = (productClicked: Product) => {
 		// cartJSON.push(product);
-		const cartLS: CartProduct[] = JSON.parse(localStorage.getItem("cart") || "[]");
-		const index = cartLS.findIndex(p => p.product.id === productClicked.id);
+		const cartLS: CartProductId[] = JSON.parse(localStorage.getItem("cart") || "[]");
+		const index = cartLS.findIndex(p => p.productId === productClicked.id);
 		if (index >= 0) { // index !== -1
 			cartLS[index].quantity++;
 		} else {
-			cartLS.push({ quantity: 1, product: productClicked });
+			cartLS.push({ quantity: 1, productId: productClicked.id });
 		}
 
 		localStorage.setItem("cart", JSON.stringify(cartLS));

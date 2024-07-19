@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { SyntheticEvent, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { AuthContext } from '../../store/AuthContext';
@@ -14,7 +14,7 @@ function Login() {
 	const navigate = useNavigate();
 	const { setLoggedIn } = useContext(AuthContext);
 
-	const login = (event: any) => {
+	const login = (event: SyntheticEvent) => {
 		event.preventDefault();
 		if (emailRef.current === null || passwordRef.current === null ) {
 			return;

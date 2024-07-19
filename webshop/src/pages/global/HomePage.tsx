@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react'
 // import productsFromFile from "../../data/products.json";
 // import cartJSON from "../../data/cart.json"
 import { Spinner } from 'react-bootstrap'
@@ -6,26 +5,10 @@ import SortButtons from '../../components/home/SortButtons';
 import FilterButtons from '../../components/home/FilterButtons';
 import ProductCard from '../../components/home/ProductCard';
 import CarouselGallery from '../../components/home/CarouselGallery';
-import { Product } from '../../models/Product';
+import useFetchProducts from '../../util/useFetchProducts';
 
 function HomePage() {
-	const [loading, setLoading] = useState(true);
-	const [products, setProducts] = useState<Product[]>([]);
-	const [productsDefault, setProductsDefault] = useState([]);
-	const url = process.env.REACT_APP_PRODUCTS_DB_URL;
-
-	useEffect(() => {
-		if (url === undefined) {
-			return;
-		}
-		fetch(url)
-		.then(res => res.json())
-		.then(json => {
-			setProducts(json || []);
-			setProductsDefault(json || []);
-			setLoading(false);
-		})
-	}, [url]);
+	const { products, productsDefault, loading, setProducts } = useFetchProducts();
 
 	if (loading) {
 		return <Spinner />

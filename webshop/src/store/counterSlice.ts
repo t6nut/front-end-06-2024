@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { CartProduct } from '../models/CartProduct'
+import { countProducts } from '../util/calculations'
 
 export const counterSlice = createSlice({
 	name: 'counter',
@@ -29,11 +30,7 @@ export const counterSlice = createSlice({
 
 function determineInitialValue() {
 	const cart: CartProduct[] = JSON.parse(localStorage.getItem("cart") || "[]");
-	let cartCount = 0;
-	cart.forEach(p =>
-		cartCount += p.quantity
-	);
-	return cartCount;
+	return countProducts(cart);
 }
 // Action creators are generated for each case reducer function
 export const { increment, decrement, decrementByAmount, empty } = counterSlice.actions

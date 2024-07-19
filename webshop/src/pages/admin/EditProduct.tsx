@@ -1,14 +1,13 @@
-import React, { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Spinner } from 'react-bootstrap';
 import { useNavigate, useParams } from "react-router-dom";
-import { Product } from '../../models/Product';
 import { Category } from '../../models/Category';
+import useFetchProducts from '../../util/useFetchProducts';
 // import productsJSON from "../../data/products.json";
 
 function EditProduct() {
-	const [loading, setLoading] = useState(true);
 	const { qnr } = useParams();
-	const [products, setProducts] = useState<Product[]>([]);
+	const {products, loading} = useFetchProducts();
 	const product = products.find(p => p.id === Number(qnr)); // kasuta find()
 	const idRef = useRef<HTMLInputElement>(null);
 	const titleRef = useRef<HTMLInputElement>(null);
@@ -23,7 +22,6 @@ function EditProduct() {
 	const [isUnique, setIsUnique] = useState(true);
 	const [categories, setCategories] = useState<Category[]>([]);
 	
-
 	const categoriesDbUrl = process.env.REACT_APP_CATEGORIES_DB_URL;
 	const productsDbUrl = process.env.REACT_APP_PRODUCTS_DB_URL;
 
@@ -38,18 +36,6 @@ function EditProduct() {
 			);
 			
 	}, [categoriesDbUrl]);
-
-	useEffect(() => {
-		if (productsDbUrl === undefined) {
-			return;
-		}
-		fetch(productsDbUrl)
-			.then(res => res.json())
-			.then(json => 
-				setProducts(json || []),
-		);
-			setLoading(false);
-	}, [productsDbUrl]);
 
 	// Reacti hookid - Reacti erikood
 	// 1. Peavad algama use eesliidesega

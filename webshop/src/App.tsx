@@ -77,6 +77,20 @@ function App() {
 
 export default App;
 
+// Taaskasutamine: 
+// HTMLi tahan taaskasutada --> components kausta alamkomponendid
+// 		return(<div>
+//			<InfoCard text="Siia saab vajutada" btnText="Vajuta" />
+//			<InfoCard text="Siit saad rohkem infot" btnText="Info" />
+//		</div>)
+
+
+// Funktsioonide taaskasutamiseks --> util kaust
+//		kokkuarvutus, impordin selle funktsiooni
+
+// Kui tahan taaskasutada, ei taha HTMLi, aga tahan hooke kasutada
+// Custom hookid
+
 // 9.07 kell 9:00 - 12:15 alamkomponendid (props), makse, CSS moodulid
 // 12.07 kell 9:00 - 12:15 globaalne muutuja Context
 // Modal --> useImperativeHandle
@@ -84,15 +98,15 @@ export default App;
 // URLde blokeerimine -> globaalselt sisselogitud staatu
 // Redux
 // TypeScript
-
 // 10. custom hookid
+
 // 11. useMemo useCallback
 // 11. re-renderdus
 // 12. unit testid
 // 12. Next.js ?
-// 13. 
-// 14.
-// 15.
+// 13. Trinidad/Wiseman proovitöö
+// 14. Contexti proovitöö
+// 15. 
 // 16.
 // 17.
 // 18. lõpuprojekti esitlemine

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 import ParcelMachines from '../../components/cart/ParcelMachines';
@@ -8,19 +8,42 @@ import { useContext } from 'react';
 import { CartSumContext } from '../../store/CartSumContext';
 import { useDispatch } from 'react-redux';
 import { decrement, decrementByAmount, empty, increment } from '../../store/counterSlice';
+import { calculateCart, countProducts } from '../../util/calculations';
+import useFetchProducts from '../../util/useFetchProducts';
+import { Spinner } from 'react-bootstrap';
+import { Product, Rating } from '../../models/Product';
 import { CartProduct } from '../../models/CartProduct';
+import { CartProductId } from '../../models/CartProductId';
+import { log } from 'console';
 // import cartJSON from '../../data/cart.json'
 
 function Cart() {
-	const [cart, setCart] = useState<CartProduct[]>(JSON.parse(localStorage.getItem("cart") || "[]"));
+	const { products, loading } = useFetchProducts();
+
+	const [cart, setCart] = useState<CartProduct[]>([]);
 	const {setCartSum} = useContext(CartSumContext);
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		// {quantity: 5, productId: 99}
+		if (loading === false) {
+			const cartLS: CartProductId[] = JSON.parse(localStorage.getItem("cart") || "[]");
+			const cartWithProducts = cartLS.map(c => (
+				{
+					quantity: c.quantity,
+					product: products.find(p => p.id === c.productId) ||
+						new Product(0, "", 0, "", "", "", false, new Rating(0, 0))
+				}
+			)).filter(c => c.product.id !== 0);
+			// {quantity: 5, product: {id: 99, price: 99}}
+			setCart(cartWithProducts);
+		}
+	}, [loading, products]);
 
 
 	const emptyCart = () => {
 		cart.splice(0);
-		setCart(cart.slice());
-		localStorage.setItem("cart", JSON.stringify(cart));
+		updateCart();
 		dispatch(empty());
 	}
 
@@ -29,17 +52,13 @@ function Cart() {
 		if (cart[index].quantity === 0) {
 			cart.splice(index, 1);
 		}
-		setCart(cart.slice());
-		localStorage.setItem("cart", JSON.stringify(cart));
-		setCartSum(calculateCart());
+		updateCart();
 		dispatch(decrement())
 	}
 
 	const increaseQuantity = (index: number) => {
 		cart[index].quantity++;
-		setCart(cart.slice());
-		localStorage.setItem("cart", JSON.stringify(cart));
-		setCartSum(calculateCart());
+		updateCart();
 		dispatch(increment())
 	}
 
@@ -47,27 +66,28 @@ function Cart() {
 		const quantity = cart[index].quantity;
 		toast.success('Product removed'); // kuidas lisada product.title toast sõnumisse?
 		cart.splice(index, 1);
-		setCart(cart.slice());
-		localStorage.setItem("cart", JSON.stringify(cart));
-		setCartSum(calculateCart());
+		updateCart();
 		dispatch(decrementByAmount(quantity));
 	}
 
-	const calculateCart = () => {
+	const updateCart = () => {
+		setCart(cart.slice());
+		const result = cart.map(c => ({quantity: c.quantity, productId: c.product.id}));
+		localStorage.setItem("cart", JSON.stringify(result));
+		setCartSum(calculateCart(cart));
+	}
+
+	/* const calculateCart = () => {
 		let cartSum = 0;
 		cart.forEach(p => 
 			cartSum += p.product.price * p.quantity
 		);
 		return cartSum;
-	}
+	} */
 
-	const countProducts = () => {
-		let cartCount = 0;
-		cart.forEach(p =>
-			cartCount += p.quantity
-		);
-		return cartCount;
-	}
+		if (loading) {
+			return <Spinner />
+		}
 
 	return (
 		<div>
@@ -93,9 +113,9 @@ function Cart() {
 
 			{cart.length > 0 && 
 				<div>
-					<div>Cart count: {countProducts()}</div>
-					<div>Cart sum: {calculateCart().toFixed(2)}</div>
-					<Payment sum={calculateCart()}/>
+					<div>Cart count: {countProducts(cart)}</div>
+					<div>Cart sum: {calculateCart(cart).toFixed(2)}</div>
+					<Payment sum={calculateCart(cart)}/>
 					<br />
 					<button onClick={emptyCart}>Empty cart</button>
 					<br />
