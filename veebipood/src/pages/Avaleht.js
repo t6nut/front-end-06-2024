@@ -8,7 +8,10 @@ function Avaleht() {
   const [tooted, setTooted] = useState(tootedJSON.slice());
 
   const lisaOstukorvi = (toode) => {
-    ostukorvJSON.push(toode);
+    /* ostukorvJSON.push(toode); */
+		const ostukorvLS = JSON.parse(localStorage.getItem("ostukorv") || "[]");
+		ostukorvLS.push(toode);
+		localStorage.setItem("ostukorv", JSON.stringify(ostukorvLS));
   }
 
   const sorteeriAZ = () => {
@@ -78,7 +81,7 @@ function Avaleht() {
 						<div>{toode.nimi}</div>
 						<div>{toode.hind}</div>
 					</Link>
-          {toode.aktiivne && <button onClick={() => lisaOstukorvi(toode)}>Lisa ostukorvi</button>}
+          {toode.aktiivne && <button className="add-to-cart" onClick={() => lisaOstukorvi(toode)}>Lisa ostukorvi</button>}
         </div>
       )}
     </div>

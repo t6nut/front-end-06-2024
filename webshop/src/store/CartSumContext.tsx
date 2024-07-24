@@ -1,6 +1,7 @@
-import { createContext, PropsWithChildren, useState } from 'react';
-import { calculateCart } from '../util/calculations';
+import { createContext, PropsWithChildren, useEffect, useState } from 'react';
+import { calculateCart, getCartWithProducts } from '../util/calculations';
 import { CartProductId } from '../models/CartProductId';
+import useFetchProducts from '../util/useFetchProducts';
 
 // Create a Context for the app
 export const CartSumContext = createContext(
@@ -13,13 +14,15 @@ export const CartSumContext = createContext(
 // Create a provider component
 export const CartSumProvider = ({ children }: PropsWithChildren) => {
 	// State that will be shared in the context
-	const [cartSum, setCartSum] = useState(calculateCartSum());
+	const { products } = useFetchProducts();
+	const [cartSum, setCartSum] = useState(0);
 
-	function calculateCartSum() {
-		/* const cartLS: CartProductId[] = JSON.parse(localStorage.getItem("cart") || "[]");
-		return calculateCart(cartLS); */
-		return 12;
-	}
+	useEffect(() => {
+		const cartLS: CartProductId[] = JSON.parse(localStorage.getItem("cart") || "[]");
+		const cartWithProducts = getCartWithProducts(cartLS, products);
+		//return calculateCart(cartLS);
+		return setCartSum(calculateCart(cartWithProducts));
+	}, [products]);
 
 	return (
 		<CartSumContext.Provider value={{ cartSum, setCartSum }}>

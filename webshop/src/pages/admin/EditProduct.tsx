@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useMemo } from 'react'
 import { Spinner } from 'react-bootstrap';
 import { useNavigate, useParams } from "react-router-dom";
 import { Category } from '../../models/Category';
@@ -8,7 +8,8 @@ import useFetchProducts from '../../util/useFetchProducts';
 function EditProduct() {
 	const { qnr } = useParams();
 	const {products, loading} = useFetchProducts();
-	const product = products.find(p => p.id === Number(qnr)); // kasuta find()
+
+	const product = useMemo(() => products.find(p => p.id === Number(qnr)), [products, qnr]);
 	const idRef = useRef<HTMLInputElement>(null);
 	const titleRef = useRef<HTMLInputElement>(null);
 	const categoryRef = useRef<HTMLSelectElement>(null);

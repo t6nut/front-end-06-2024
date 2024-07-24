@@ -8,7 +8,7 @@ function Kinkekaart() {
 
   function vahenda() {
     setKogus(kogus - 1);
-    setSonum("Vähendasid kogust!");
+		setSonum("Vähendasid kogust!");
   }
 
   function suurenda() {
@@ -18,6 +18,7 @@ function Kinkekaart() {
 
   return (
     <div>
+			<h1>learn react</h1>
       <div>{sonum}</div>
       <button disabled={kogus === 1} onClick={vahenda}>-</button>
       <span>{kogus}</span>

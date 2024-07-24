@@ -21,6 +21,7 @@ function AddProduct() {
 	const categoriesDbUrl = process.env.REACT_APP_CATEGORIES_DB_URL;
 	const {products} = useFetchProducts();
 
+	// custom hook categories fetch
 	useEffect(() => {
 		if (categoriesDbUrl === undefined) {
 			return;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 import ParcelMachines from '../../components/cart/ParcelMachines';
@@ -8,38 +8,36 @@ import { useContext } from 'react';
 import { CartSumContext } from '../../store/CartSumContext';
 import { useDispatch } from 'react-redux';
 import { decrement, decrementByAmount, empty, increment } from '../../store/counterSlice';
-import { calculateCart, countProducts } from '../../util/calculations';
+import { calculateCart, countProducts, getCartWithProducts } from '../../util/calculations';
 import useFetchProducts from '../../util/useFetchProducts';
 import { Spinner } from 'react-bootstrap';
-import { Product, Rating } from '../../models/Product';
 import { CartProduct } from '../../models/CartProduct';
 import { CartProductId } from '../../models/CartProductId';
-import { log } from 'console';
 // import cartJSON from '../../data/cart.json'
 
 function Cart() {
 	const { products, loading } = useFetchProducts();
+	const cartLS: CartProductId[] = useMemo(() => 
+		JSON.parse(localStorage.getItem("cart") || "[]"), []);
 
 	const [cart, setCart] = useState<CartProduct[]>([]);
 	const {setCartSum} = useContext(CartSumContext);
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		// {quantity: 5, productId: 99}
+	const getCart = useCallback(() => {
 		if (loading === false) {
-			const cartLS: CartProductId[] = JSON.parse(localStorage.getItem("cart") || "[]");
-			const cartWithProducts = cartLS.map(c => (
-				{
-					quantity: c.quantity,
-					product: products.find(p => p.id === c.productId) ||
-						new Product(0, "", 0, "", "", "", false, new Rating(0, 0))
-				}
-			)).filter(c => c.product.id !== 0);
-			// {quantity: 5, product: {id: 99, price: 99}}
+			const cartWithProducts = getCartWithProducts(cartLS, products)
+				.filter(c => c.product.id !== 0);
 			setCart(cartWithProducts);
 		}
-	}, [loading, products]);
+	}, [loading, products, cartLS])
 
+	useEffect(() => {
+		getCart();
+		console.log("test");
+	}, [getCart]);
+	
+	
 
 	const emptyCart = () => {
 		cart.splice(0);

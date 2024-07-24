@@ -77,7 +77,7 @@ function App() {
 
 export default App;
 
-// Taaskasutamine: 
+// Taaskasutamine:
 // HTMLi tahan taaskasutada --> components kausta alamkomponendid
 // 		return(<div>
 //			<InfoCard text="Siia saab vajutada" btnText="Vajuta" />
@@ -99,14 +99,16 @@ export default App;
 // Redux
 // TypeScript
 // 10. custom hookid
-
 // 11. useMemo useCallback
 // 11. re-renderdus
+
+// 25.07 13:00 - 16:15
+
 // 12. unit testid
 // 12. Next.js ?
 // 13. Trinidad/Wiseman proovitöö
 // 14. Contexti proovitöö
-// 15. 
+// 15. React Native
 // 16.
 // 17.
 // 18. lõpuprojekti esitlemine
