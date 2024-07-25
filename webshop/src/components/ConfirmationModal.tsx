@@ -31,7 +31,7 @@ const ConfirmationModal = forwardRef((props: ConfirmationModalInterface, ref) =>
 	const handleClose = () => setShow(false);
 
 	return (
-		<Modal show={show} onHide={handleClose}>
+		<Modal data-testid="modal-id" show={show} onHide={handleClose}>
 			<Modal.Header closeButton>
 				<Modal.Title>Modal heading</Modal.Title>
 			</Modal.Header>

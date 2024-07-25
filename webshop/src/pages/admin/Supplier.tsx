@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { Spinner } from 'react-bootstrap';
+import { useEffect, useState } from 'react'
 import Payment from '../../components/cart/Payment';
 import { Product } from '../../models/Product';
+import { fetchData } from '../../util/services';
 
 function Supplier() {
 	const [loading, setLoading] = useState(true);
@@ -9,8 +9,9 @@ function Supplier() {
 
 	// tehakse 1x useEffect sisu kui lehele tullakse
 	useEffect(() => {
-		fetch('https://fakestoreapi.com/products')
-			.then(response => response.json()) //kogu tagastus -> statuscode, headers
+		/* fetch('https://fakestoreapi.com/products')
+			.then(response => response.json()) //kogu tagastus -> statuscode, headers */
+			fetchData("https://fakestoreapi.com/products")
 			.then(json => {
 				setProducts(json)
 				setLoading(false)
@@ -21,7 +22,7 @@ function Supplier() {
 	useEffect uuest käima */
 
 	if (loading) {
-		return <Spinner />
+		return <div>Loading...</div>
 	}
 
   return (

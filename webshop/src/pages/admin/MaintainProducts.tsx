@@ -59,7 +59,7 @@ function MaintainProducts() {
 	}
 
 	if (loading) {
-		return <Spinner />
+		return <Spinner data-testid="spinner" />
 	}
 
 	return (
