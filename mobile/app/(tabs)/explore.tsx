@@ -1,5 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, FlatList, View, Text } from 'react-native';
+import { StyleSheet, FlatList, View, Text, SafeAreaView } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -19,7 +19,7 @@ export default function TabTwoScreen() {
 		//fetch('https://dashboard.elering.ee/api/nps/price')
 			//.then(response => response.json)
 			//.then(json)
-		const response = await fetch('https://react-webshop-e5eea-default-rtdb.europe-west1.firebasedatabase.app/elering.json');
+		const response = await fetch('https://dashboard.elering.ee/api/nps/price');
 		const json = await response.json();
 		setPrices(json.data.ee);
 	}
@@ -32,11 +32,13 @@ export default function TabTwoScreen() {
         <ThemedText type="title">Explore</ThemedText>
       </ThemedView>
       <ThemedText>This app includes example code to help you get started.</ThemedText>
-
-			<FlatList
-				data={prices}
-				renderItem={price => <Item price={price.item.price} timestamp={price.item.timestamp}/>}
-			/>
+			
+			<SafeAreaView style={{ flex: 1 }}>
+				<FlatList
+					data={prices}
+					renderItem={price => <Item price={price.item.price} timestamp={price.item.timestamp}/>}
+				/>
+			</SafeAreaView>
 
     </ParallaxScrollView>
   );

@@ -1,9 +1,8 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Button } from 'react-native';
+import { StyleSheet, Button, TextInput } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { TextInput } from 'react-native-gesture-handler';
 import { useRef, useState } from 'react';
 
 interface Profile {
