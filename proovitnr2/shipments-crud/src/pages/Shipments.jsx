@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -39,13 +39,19 @@ function Shipments() {
 	};
 
 	const updateShipment = (updatedShipment) => {
-		setShipments((prevShipments) =>
-			prevShipments.map((shipment) =>
+		setShipments((prevShipments) => {
+			// Create a new array to ensure immutability
+			return prevShipments.map((shipment) =>
 				shipment.orderNo === updatedShipment.orderNo ? updatedShipment : shipment
-			)
-		);
+			);
+		});
 		handleClose(); // Close the modal after updating
 	};
+
+	useEffect(() => {
+		// You can add logging or other logic here
+		console.log("Shipments updated:", shipments);
+	}, [shipments]);
 
 	const remove = (shipment) => {
 		const index = shipments.findIndex(s => s.orderNo === shipment.orderNo);
@@ -70,7 +76,7 @@ function Shipments() {
 	return (
 		<Paper sx={{ width: '100%', overflow: 'hidden' }}>
 			<TableContainer sx={{ maxHeight: "100vh" }}>
-				<Table stickyHeader aria-label="sticky table">
+				<Table key={shipments.length} stickyHeader aria-label="sticky table">
 					<TableHead sx={{ fontWeight: "bold" }}>
 						<TableRow>
 							{columns.map((column) => (

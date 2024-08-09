@@ -58,11 +58,11 @@ function EditModal({ open, onClose, shipment, onEdit }) {
 			<Box sx={style}>
 				<h2>{shipment.orderNo}</h2>
 				<TextField ref={orderNoRef} type="text" defaultValue={shipment.orderNo} className="outlined-basic" label="Order No" variant="outlined" /><br /><br />
-				<TextField ref={dateRef} type="date" defaultValue={formatDate(shipment.date)} id="outlined-basic" label="" variant="outlined" /><br /><br />
-				<TextField ref={customerRef} type="text" defaultValue={shipment.customer} id="outlined-basic" label="Customer" variant="outlined" /><br /><br />
-				<TextField ref={trackingNoRef} type="text" defaultValue={shipment.trackingNo} id="outlined-basic" label="Tracking No" variant="outlined" /><br /><br />
-				<TextField ref={statusRef} type="text" defaultValue={shipment.status} id="outlined-basic" label="Status" variant="outlined" /><br /><br />
-				<TextField ref={consigneeRef} type="text" defaultValue={shipment.consignee} id="outlined-basic" label="Consignee" variant="outlined" /><br /><br />
+				<TextField ref={dateRef} type="date" defaultValue={formatDate(shipment.date)} className="outlined-basic" label="" variant="outlined" /><br /><br />
+				<TextField ref={customerRef} type="text" defaultValue={shipment.customer} className="outlined-basic" label="Customer" variant="outlined" /><br /><br />
+				<TextField ref={trackingNoRef} type="text" defaultValue={shipment.trackingNo} className="outlined-basic" label="Tracking No" variant="outlined" /><br /><br />
+				<TextField ref={statusRef} type="text" defaultValue={shipment.status} className="outlined-basic" label="Status" variant="outlined" /><br /><br />
+				<TextField ref={consigneeRef} type="text" defaultValue={shipment.consignee} className="outlined-basic" label="Consignee" variant="outlined" /><br /><br />
 				<Button onClick={editShipment}>Update</Button>
 			</Box>
 		</Modal>
