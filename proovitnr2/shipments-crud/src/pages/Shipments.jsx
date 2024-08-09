@@ -39,6 +39,8 @@ function Shipments() {
 	};
 
 	const updateShipment = (updatedShipment) => {
+		//console.log(updatedShipment);
+		
 		setShipments((prevShipments) => {
 			// Create a new array to ensure immutability
 			return prevShipments.map((shipment) =>
@@ -50,7 +52,7 @@ function Shipments() {
 
 	useEffect(() => {
 		// You can add logging or other logic here
-		console.log("Shipments updated:", shipments);
+		/* console.log("Shipments updated:", shipments); */
 	}, [shipments]);
 
 	const remove = (shipment) => {
