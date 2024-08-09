@@ -1,9 +1,7 @@
-import React, { useRef, useState } from 'react';
-//import { Spinner } from 'react-bootstrap';
-import { useNavigate, useParams } from "react-router-dom";
-import shipmentsJSON from '../data/shipments.json';
+import React, { useRef } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import { Button, TextField } from '@mui/material';
 
 const style = {
 	position: 'absolute',
@@ -17,76 +15,58 @@ const style = {
 	p: 4,
 };
 
-function EditModal() {
-	const [open, setOpen] = React.useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
-	const { orderNo } = useParams();
-	const [shipments, setShipments] = useState(shipmentsJSON);
-	const shipment = shipments.find(s => s.orderNo === orderNo); // use find()
+// Utility function to format date to "yyyy-MM-dd"
+function formatDate(dateString) {
+	const date = new Date(dateString);
+	const year = date.getFullYear();
+	const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed in JS
+	const day = String(date.getDate()).padStart(2, '0');
+	return `${year}-${month}-${day}`;
+}
+
+function EditModal({ open, onClose, shipment, onEdit }) {
 	const orderNoRef = useRef();
 	const dateRef = useRef();
 	const customerRef = useRef();
 	const trackingNoRef = useRef();
 	const statusRef = useRef();
 	const consigneeRef = useRef();
-	const navigate = useNavigate();
-	//const [isUnique, setIsUnique] = useState(true);
 
 	const editShipment = () => {
 		const changedShipment = {
-			"orderNo": orderNoRef.current.value,
-			"date": dateRef.current.value,
-			"customer": customerRef.current.value,
-			"trackingNo": trackingNoRef.current.value,
-			"status": statusRef.current.value,
-			"consignee": consigneeRef.current.value,
-		}
-		const index = shipments.findIndex(s => s.orderNo === orderNo);
-		shipments[index] = changedShipment;
-		if (shipmentsJSON === undefined) {
-			return;
-		}
-	}
+			orderNo: orderNoRef.current.value,
+			date: dateRef.current.value,
+			customer: customerRef.current.value,
+			trackingNo: trackingNoRef.current.value,
+			status: statusRef.current.value,
+			consignee: consigneeRef.current.value,
+		};
+		onEdit(changedShipment);  // Trigger the updateShipment function in Shipments
+	};
 
-	console.log("Shipment found:", shipment); // Debugging shipment finding
-
-	if (shipment === undefined) {
-		return <div>shipment not found</div>
+	if (!shipment) {
+		return null;
 	}
 
 	return (
-		<div>
-			{/* {isUnique === false && <div>Shipment ID is not Unique!</div>} */}
-			<Modal
-				open={open}
-				onClose={handleClose}
-				aria-labelledby="modal-modal-title"
-				aria-describedby="modal-modal-description"
-			>
-				<Box sx={style}>
-					<h1>{shipment.orderNo}</h1>
-					<label htmlFor="">shipment orderNo</label> <br />
-					<input ref={orderNoRef} type="text" defaultValue={shipment.orderNo} />
-					<label htmlFor="">date</label> <br />
-					<input ref={dateRef} type="date" defaultValue={shipment.date} /><br />
-					<label htmlFor="">customer</label> <br />
-					<input ref={customerRef} type="text" defaultValue={shipment.customer} /><br />
-					<label htmlFor="">trackingNo</label> <br />
-					<input ref={trackingNoRef} type="text" defaultValue={shipment.trackingNo} /><br />
-					{/* <label htmlFor="">shipment status select?</label> <br />
-			<select ref={categoryRef} defaultValue={shipment.category}>
-				{categories.map(category => <option key={category.name}>{category.name}</option>)}
-			</select><br /> */}
-					<label htmlFor="">status</label> <br />
-					<input ref={statusRef} type="text" defaultValue={shipment.status} /><br />
-					<label htmlFor="">shipment image</label> <br />
-					<input ref={consigneeRef} type="text" defaultValue={shipment.consignee} /><br />
-					<button onClick={editShipment}>Update</button>
-				</Box>
-			</Modal>
-		</div>
-	)
+		<Modal
+			open={open}
+			onClose={onClose}
+			aria-labelledby="modal-modal-title"
+			aria-describedby="modal-modal-description"
+		>
+			<Box sx={style}>
+				<h2>{shipment.orderNo}</h2>
+				<TextField ref={orderNoRef} type="text" defaultValue={shipment.orderNo} className="outlined-basic" label="Order No" variant="outlined" /><br /><br />
+				<TextField ref={dateRef} type="date" defaultValue={formatDate(shipment.date)} id="outlined-basic" label="" variant="outlined" /><br /><br />
+				<TextField ref={customerRef} type="text" defaultValue={shipment.customer} id="outlined-basic" label="Customer" variant="outlined" /><br /><br />
+				<TextField ref={trackingNoRef} type="text" defaultValue={shipment.trackingNo} id="outlined-basic" label="Tracking No" variant="outlined" /><br /><br />
+				<TextField ref={statusRef} type="text" defaultValue={shipment.status} id="outlined-basic" label="Status" variant="outlined" /><br /><br />
+				<TextField ref={consigneeRef} type="text" defaultValue={shipment.consignee} id="outlined-basic" label="Consignee" variant="outlined" /><br /><br />
+				<Button onClick={editShipment}>Update</Button>
+			</Box>
+		</Modal>
+	);
 }
 
 export default EditModal;
