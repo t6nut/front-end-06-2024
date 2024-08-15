@@ -112,3 +112,6 @@ export default App;
 // 16.
 // 17.
 // 18. lõpuprojekti esitlemine
+
+// R 11:15-12:15 --> Proovitöö, lõpuprojekt
+// 1, 2 nädala pärast
