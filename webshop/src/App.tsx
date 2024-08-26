@@ -107,7 +107,7 @@ export default App;
 // 12. unit testid
 // 12. Next.js ?
 // 13. Trinidad/Wiseman proovitöö -> //TODO: https://proovitoo.twn.ee/intro
-// 14. Contexti proovitöö //TODO: tic tac toe - email
+// 14. Contexti proovitöö //TODO: tic tac toe - email: 26.08 Kell 16.00
 // 15. React Native
 // 16.
 // 17.

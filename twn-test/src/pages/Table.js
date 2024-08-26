@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Pagination from '../components/Pagination';
+import loader from "../assets/imgs/loader.svg";
 
 function Article() {
 	const [tables, setTables] = useState(null);
@@ -125,7 +126,7 @@ function Article() {
 					</div>
 				</>
 			) : (
-				<img src="../../assets/imgs/loader.svg" alt="Loading..." />
+					<img src={loader} alt="" />
 			)}
 		</div>
 	);
