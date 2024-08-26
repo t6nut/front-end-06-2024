@@ -1,5 +1,5 @@
-// src/components/GameBoard.js
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { GameContext } from "../context/GameContext";
 
 const GameBoard = () => {
@@ -7,6 +7,7 @@ const GameBoard = () => {
 	const [board, setBoard] = useState(Array(9).fill(null));
 	const [isXNext, setIsXNext] = useState(true);
 	const [winner, setWinner] = useState(null);
+	const navigate = useNavigate();
 
 	const handleClick = (index) => {
 		if (board[index] || winner) return;
@@ -61,6 +62,8 @@ const GameBoard = () => {
 				))}
 			</div>
 			{winner && <h3>Winner: {winner}</h3>}
+
+			<button onClick={() => navigate("/scoreboard")}>View Scoreboard</button>
 		</div>
 	);
 };

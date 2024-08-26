@@ -1,24 +1,23 @@
 import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { GameProvider } from "./context/GameContext";
+import StartGame from "./components/StartGame";
+import GameBoard from "./components/GameBoard";
+import Scoreboard from "./components/Scoreboard";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	return (
+		<Router>
+			<GameProvider>
+				<Routes>
+					<Route path="/" element={<StartGame />} />
+					<Route path="/game" element={<GameBoard />} />
+					<Route path="/scoreboard" element={<Scoreboard />} />
+				</Routes>
+			</GameProvider>
+		</Router>
+	);
+};
 
 export default App;
