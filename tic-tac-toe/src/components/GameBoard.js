@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { GameContext } from "../context/GameContext";
 
 const GameBoard = () => {
-	const { players, history, addGameToHistory } = useContext(GameContext);
+	const { players, addGameToHistory } = useContext(GameContext);
 	const [board, setBoard] = useState(Array(9).fill(null));
 	const [isXNext, setIsXNext] = useState(true);
 	const [winner, setWinner] = useState(null);
@@ -44,6 +44,12 @@ const GameBoard = () => {
 		if (board.every(Boolean)) {
 			setWinner("Draw");
 			addGameToHistory({ players, winner: "Draw" });
+		}
+
+		if (winner) {
+			// Determine winner's name
+			const winnerName = winner === 'X' ? players.player1 : players.player2;
+			addGameToHistory({ players, winner: winnerName });
 		}
 	};
 

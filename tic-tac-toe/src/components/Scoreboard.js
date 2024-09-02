@@ -17,7 +17,7 @@ const Scoreboard = () => {
         ) : (
           history.map((game, index) => (
             <li key={index}>
-              {game.players.player1} vs {game.players.player2} - Winner: {game.winner}
+							{game.players.player1} vs {game.players.player2} - Winner: {game.winner}
             </li>
           ))
         )}
