@@ -3,9 +3,6 @@ import { useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { Picture } from '../../models/Picture';
 
-// .map() --> piltide osas
-// useEffect, et andmebaasist kõik pildid võtta
-// {url: "", alt: "", header: "", text: ""}
 function CarouselGallery() {
 	const [images, setImages] = useState<Picture[]>([]);
 	const pictureDbUrl = process.env.REACT_APP_PICTURES_DB_URL;

@@ -18,15 +18,16 @@ function NavigationBar() {
 	}
 	
 	return (
-		<Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+		<Navbar collapseOnSelect expand="lg" className="navbar-dark">
 			<Container>
 				<Navbar.Brand as={Link} to="/">TT - Portfolio</Navbar.Brand>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Nav className="me-auto">
 						{loggedIn === true && <Nav.Link as={Link} to="/admin">Admin</Nav.Link>}
+						<Nav.Link as={Link} to="/projects">Projects</Nav.Link>
+						<Nav.Link as={Link} to="/about-me">About me</Nav.Link>
 						<Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-						<Nav.Link as={Link} to="/shops">Projects</Nav.Link>
 					</Nav>
 					<Nav>
 						{loggedIn === false && <Nav.Link as={Link} to="/login">Login</Nav.Link>}

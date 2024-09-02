@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import toast from 'react-hot-toast';
 import { Category } from '../../models/Category';
 import { Product } from '../../models/Product';
@@ -11,7 +11,7 @@ function AddProduct() {
 	const titleRef = useRef<HTMLInputElement>(null);
 	const categoryRef = useRef<HTMLSelectElement>(null);
 	const descRef = useRef<HTMLTextAreaElement>(null);
-	const priceRef = useRef<HTMLInputElement>(null);
+	const urlRef = useRef<HTMLInputElement>(null);
 	const imageRef = useRef<HTMLInputElement>(null);
 	const ratingRef = useRef<HTMLInputElement>(null);
 	const activeRef = useRef<HTMLInputElement>(null);
@@ -37,9 +37,9 @@ function AddProduct() {
 
 
 		if (!checkImage() || titleRef.current === null || idRef.current === null ||
-			descRef.current === null || priceRef.current === null ||
+			descRef.current === null ||
 			categoryRef.current === null || imageRef.current === null ||
-			ratingRef.current === null || activeRef.current === null ) {
+			urlRef.current === null || activeRef.current === null ) {
 			return;
 		}
 		
@@ -62,12 +62,8 @@ function AddProduct() {
 			'title': titleRef.current.value,
 			'category': categoryRef.current.value,
 			'description': descRef.current.value,
-			'price': Number(priceRef.current.value),
+			'url': urlRef.current.value,
 			'image': imageRef.current.value,
-			'rating': {
-				'rate': Number(ratingRef.current.value),
-				'count': 0,
-			},
 			'active': activeRef.current.checked
 		}
 
@@ -80,7 +76,7 @@ function AddProduct() {
 		fetch(productsDbUrl, {method: "PUT", body: JSON.stringify(products)})
 			.then(() => {
 				if (titleRef.current === null || idRef.current === null ||
-					descRef.current === null || priceRef.current === null ||
+					descRef.current === null || urlRef.current === null ||
 					categoryRef.current === null || imageRef.current === null ||
 					ratingRef.current === null || activeRef.current === null) {
 					return;
@@ -88,10 +84,9 @@ function AddProduct() {
 				idRef.current.value = "";
 				titleRef.current.value = "";
 				descRef.current.value = "";
-				priceRef.current.value = "";
+				urlRef.current.value = "";
 				imageRef.current.value = "";
 				categoryRef.current.value = "";
-				ratingRef.current.value = "";
 				activeRef.current.checked = false;
 			})
 	}
@@ -141,8 +136,8 @@ function AddProduct() {
 			</select><br />
 			<label>Product description</label> <br />
 			<textarea ref={descRef} /> <br />
-			<label>Product price</label> <br />
-			<input ref={priceRef} type="number" /> <br />
+			<label>Project url</label> <br />
+			<input ref={urlRef} type="text" /> <br />
 			<label>Product rating</label> <br />
 			<input ref={ratingRef} type="number" max="5" min="0" step=".1" /> <br />
 			<label>Product image</label> <br />

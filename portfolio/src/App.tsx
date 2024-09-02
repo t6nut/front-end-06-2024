@@ -1,8 +1,8 @@
 import './App.css';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import HomePage from './pages/global/HomePage'
-import { ContactUs } from './pages/global/ContactUs';
-import Shops from './pages/global/Shops';
+import { Contact } from './pages/global/Contact';
+import AboutMe from './pages/global/AboutMe';
 import SingleProduct from './pages/global/SingleProduct';
 import AdminHome from './pages/admin/AdminHome';
 import AddProduct from './pages/admin/AddProduct';
@@ -19,6 +19,7 @@ import { useContext } from 'react';
 import { Spinner } from 'react-bootstrap';
 import MaintainPictures from './pages/admin/MaintainPictures';
 import HotToast from './components/HotToast';
+import Projects from './pages/global/Projects';
 
 function App() {
 	const { loggedIn, fetching, error, setError } = useContext(AuthContext);
@@ -43,8 +44,9 @@ function App() {
 			
       <Routes>
 				<Route path="" element={ <HomePage /> }></Route>
-				<Route path="contact" element={ <ContactUs /> }></Route>
-				<Route path="shops" element={ <Shops /> }></Route>
+				<Route path="contact" element={ <Contact /> }></Route>
+				<Route path="projects" element={ <Projects /> }></Route>
+				<Route path="about-me" element={ <AboutMe /> }></Route>
 				<Route path="product/:title" element={ <SingleProduct /> }></Route>
 
 				{loggedIn === true ?

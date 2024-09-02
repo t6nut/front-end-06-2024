@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-	const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDErnzKscfWiyqd-VWyAIxGvLjuGCBco2g'; //env kaudu
+	const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + process.env.REACT_APP_FIREBASE_KEY; //env kaudu
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
 	const [message, setMessage] = useState('');

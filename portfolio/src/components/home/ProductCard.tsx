@@ -7,8 +7,9 @@ function ProductCard ({product}: {product: Product}) {
 	return (
 		<div className="product">
 			<img style={{ width: "100px", height: "100px", objectFit: "contain" }} src={product.image} alt="" />
-			<div>{product.title.length > 50 ? product.title.substring(0, 50) + "..." : product.title}</div>
-			<div>€{product.price}</div>
+			<h3>{product.title.length > 50 ? product.title.substring(0, 50) + "..." : product.title}</h3>
+			<div>{product.title.length > 50 ? product.title.substring(0, 50) + "..." : product.category}</div>
+			<Link to={product.url} rel='noopener noreferrer' target="_blank">Website link</Link>
 			<Link to={"/product/" + product.title.toLowerCase().replaceAll(" ", "-")}>
 				<button>Read more</button>
 			</Link>

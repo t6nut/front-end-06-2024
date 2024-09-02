@@ -13,7 +13,7 @@ export interface ConfirmationModalRefInterface {
 
 const ConfirmationModal = forwardRef((props: ConfirmationModalInterface, ref) => {
 	const [show, setShow] = useState(false);
-	const toBeDeletedRef = useRef<Product>(new Product(0, "", 0, "", "", "", false, new Rating(0, 0)));
+	const toBeDeletedRef = useRef<Product>(new Product(0, "", "", "", "", "", false));
 
 	useImperativeHandle(ref, () => ({
 

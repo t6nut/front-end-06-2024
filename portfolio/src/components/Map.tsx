@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import ChangeView from './ChangeView';
-import { Shop } from '../models/Shop';
+import { Location } from '../models/Location';
 let DefaultIcon = L.icon({
 	iconUrl: icon,
 	shadowUrl: iconShadow,
@@ -14,7 +14,7 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 interface MapInterface {
-	shops: Shop[],
+	locations: Location[],
 	mapCoordinates: {
 		lngLat: LatLngExpression,
 		zoom: number
@@ -33,9 +33,9 @@ function Map(props: MapInterface) {
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
 
-				{props.shops.map(shop => 
-					<Marker position={[shop.coordinates.lng, shop.coordinates.lat]}>
-						{shop.name}
+				{props.locations.map(location => 
+					<Marker position={[location.coordinates.lng, location.coordinates.lat]}>
+						{location.name}
 					</Marker>
 				)}
 			</MapContainer>

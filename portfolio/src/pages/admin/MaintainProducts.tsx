@@ -70,12 +70,11 @@ function MaintainProducts() {
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Rating</th>
 						<th>Image</th>
 						<th>Title</th>
 						<th>Category</th>
 						<th>Description</th>
-						<th>Price</th>
+						<th>Website url</th>
 						<th>Options</th>
 					</tr>
 				</thead>
@@ -83,12 +82,11 @@ function MaintainProducts() {
 					{products.map((p) =>
 						<tr key={p.id} className={p.active ? styles.active : styles.inactive }>
 							<td>{p.id}</td>
-							<td>{p.rating.rate}/{p.rating.count}</td> 
 							<td><img className='image' src={p.image} alt="" /></td>
 							<td>{p.title}</td>
 							<td>{p.category}</td>
 							<td>{p.description}</td>
-							<td>{p.price}</td>
+							<td>{p.url}</td>
 							<td>
 								<button onClick={() =>showModal(p) }>Remove</button>
 								<Link to={"/admin/edit-product/" + p.id}>

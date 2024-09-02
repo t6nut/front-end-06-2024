@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Spinner } from 'react-bootstrap';
-import { Shop } from '../../models/Shop';
+import { Location } from '../../models/Location';
 
 function MaintainShops() {
 	const [loading, setLoading] = useState(true);
-	const [shops, setShops] = useState<Shop[]>([]);
+	const [shops, setShops] = useState<Location[]>([]);
 	const shopRef = useRef<HTMLInputElement>(null);
 	const lngRef = useRef<HTMLInputElement>(null);
 	const latRef = useRef<HTMLInputElement>(null);

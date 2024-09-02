@@ -9,7 +9,7 @@ import { AuthContext } from '../../store/AuthContext';
 import { useContext } from 'react';
 
 function SignUp() {
-	const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDErnzKscfWiyqd-VWyAIxGvLjuGCBco2g'; //env kaudu
+	const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + process.env.REACT_APP_FIREBASE_KEY; //env kaudu
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
 	const [message, setMessage] = useState('');

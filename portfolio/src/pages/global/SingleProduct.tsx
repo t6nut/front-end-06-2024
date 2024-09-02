@@ -1,5 +1,5 @@
 import { Spinner } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import useFetchProducts from '../../util/useFetchProducts';
 // import productsJSON from '../../data/products.json'
 
@@ -13,17 +13,18 @@ function SingleProduct() {
 	}
 
 	if (product === undefined) {
-		return <h1>Product not found!</h1>
+		return <h1>Projects not found!</h1>
 	}
 
 	return (
 		<div className='single-product'>
-			<h1>Product name: {product.title}</h1>
-			<p>Category: {product.category}</p>
+			<h1>{product.title}</h1>
+			<p>{product.category}</p>
 			<img src={product.image} alt="" />
-			<p>Product price: {product.price}</p>
-			<p>Product descriptions: {product.description}</p>
-			<p>Product rating: {product.rating.rate} ({product.rating.count})</p>
+			<br />
+			<br />
+			<p>{product.description}</p>
+			<Link to={product.url} rel='noopener noreferrer' target="_blank">Website</Link>
 		</div>
 	)
 }

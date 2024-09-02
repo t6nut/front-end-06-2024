@@ -1,4 +1,4 @@
-export type Shop = {
+export type Location = {
 	coordinates: {
 		lat: number, 
 		lng: number

@@ -2,7 +2,7 @@ import { SyntheticEvent, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
 
-export const ContactUs = () => {
+export const Contact = () => {
 	const form = useRef<HTMLFormElement>(null);
 
 	const sendEmail = (e: SyntheticEvent) => {
@@ -29,7 +29,9 @@ export const ContactUs = () => {
 
 	return (
 		<div>
-			<h1>Contact us</h1>
+			<h1>Contact</h1>
+			<h6>Ask me anything!</h6>
+			<br />
 			<form ref={form} onSubmit={sendEmail}>
 				<label htmlFor="name">Name</label><br />
 				<input id="name" type="text" name="user_name" /><br />
