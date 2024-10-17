@@ -18,23 +18,23 @@ function NavigationBar() {
 	}
 	
 	return (
-		<Navbar collapseOnSelect expand="lg" className="navbar-dark">
+		<Navbar sticky="top" collapseOnSelect expand="md" className="navbar-dark">
 			<Container>
 				<Navbar.Brand as={Link} to="/">TT - Portfolio</Navbar.Brand>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
-					<Nav className="me-auto">
+					<Nav>
 						{loggedIn === true && <Nav.Link as={Link} to="/admin">Admin</Nav.Link>}
 						<Nav.Link as={Link} to="/projects">Projects</Nav.Link>
 						<Nav.Link as={Link} to="/about-me">About me</Nav.Link>
 						<Nav.Link as={Link} to="/contact">Contact</Nav.Link>
 					</Nav>
-					<Nav>
+					{/* <Nav>
 						{loggedIn === false && <Nav.Link as={Link} to="/login">Login</Nav.Link>}
 						{loggedIn === false && <Nav.Link as={Link} to="/signup">Signup</Nav.Link>}
 						{loggedIn === true && <Nav.Link onClick={logout}>Logout</Nav.Link>}
 					
-					</Nav>
+					</Nav> */}
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>

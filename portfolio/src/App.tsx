@@ -20,6 +20,7 @@ import { Spinner } from 'react-bootstrap';
 import MaintainPictures from './pages/admin/MaintainPictures';
 import HotToast from './components/HotToast';
 import Projects from './pages/global/Projects';
+import FooterNav from './components/FooterNav';
 
 function App() {
 	const { loggedIn, fetching, error, setError } = useContext(AuthContext);
@@ -67,6 +68,8 @@ function App() {
 
 				<Route path="*" element={ <NotFound /> }></Route>
 			</Routes>
+
+			<FooterNav />
     </div>
   );
 }

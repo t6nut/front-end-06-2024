@@ -16,7 +16,7 @@ function Projects() {
 
 	return (
 		<div>
-			<h1>Here be some of my works</h1>
+			<h1>Some of my works</h1>
 			<p></p>
 			{/* <CarouselGallery /> */}
 			{/* <SortButtons products={products} setProducts={setProducts} /> */}

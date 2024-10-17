@@ -32,6 +32,7 @@ export const Contact = () => {
 			<h1>Contact</h1>
 			<h6>Ask me anything!</h6>
 			<br />
+			{/* //TODO: Validate email, don't let send empty/spam emails */}
 			<form ref={form} onSubmit={sendEmail}>
 				<label htmlFor="name">Name</label><br />
 				<input id="name" type="text" name="user_name" /><br />

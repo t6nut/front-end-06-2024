@@ -24,7 +24,7 @@ function SingleProduct() {
 			<br />
 			<br />
 			<p>{product.description}</p>
-			<Link to={product.url} rel='noopener noreferrer' target="_blank">Website</Link>
+			<Link className="button" to={product.url} rel='noopener noreferrer' target="_blank">Website</Link>
 		</div>
 	)
 }

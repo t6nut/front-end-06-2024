@@ -28,7 +28,7 @@ const FilterButtons = (props: FilterButtonsInterface) => {
 			<h6>Filter by category:</h6>
 			{/* <input onChange={filterByCategory} ref={searchedRef} type="text" /> */}
 			<select defaultValue="" onChange={filterByCategory} ref={searchedRef}>
-				<option value="">--Select category--</option>
+				<option value=""> -- Select category</option>
 				{categoryOptions.map((category) =>
 					<option key={category}>{category}</option> //reset filter?
 				)}
