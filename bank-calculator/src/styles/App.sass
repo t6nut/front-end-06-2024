@@ -1,0 +1,100 @@
+$dark: #262633
+$gray: #6C6972
+$light-blue: #8ECDD1
+$light-brown: #F1EDEB
+
+.App
+	margin: 0 auto
+	color: $dark
+	max-width: 942px
+
+.btn
+	position: relative
+	cursor: pointer
+	border: none
+	background: none
+	font-weight: 300
+	//transition: all .2s ease-in-out
+	&--hover-line
+		&:after
+			position: absolute
+			bottom: -1px
+			transition: all ease-in-out .2s
+			background: none repeat scroll 0 0 $dark
+			content: ""
+			display: block
+			height: 1px
+			width: 0
+		&:hover
+			&:after
+				width: 100%
+	&--gray
+		margin-left: 24px
+		color: $gray
+		display: flex
+		align-items: center
+		font-weight: 500
+		transition: .2s linear
+		&:hover
+			color: $dark
+			.btn--icon *
+				stroke: $dark
+		.btn--icon
+			margin-right: 8px
+			position: absolute
+			left: -24px
+			
+	&--dark
+		position: relative
+		padding: 14px 16px
+		border-radius: 4px
+		color: #FFFFFF
+		background: #3B3B47
+		transition: background 0.5s ease
+		p
+			position: relative
+			z-index: 1
+		&::after
+			content: ''
+			position: absolute
+			border-radius: 4px
+			top: 0
+			left: 0
+			right: 0
+			bottom: 0
+			background: linear-gradient(90deg, rgb(59, 59, 71) 0%, rgb(74, 179, 186) 100%)
+			opacity: 0
+			transition: opacity 0.5s ease
+			z-index: 0
+		&:hover
+			&::after
+				opacity: 1
+
+.link
+	display: inline-block
+	position: relative
+	text-decoration-thickness: 1px
+	text-underline-offset: 4px
+	color: $dark
+	&--gray
+		display: inline-flex
+		margin: 0 auto
+		margin-top: 16px
+		font-size: 14px
+		color: $gray
+		transition: all ease-in-out .2s
+		&:after
+			position: absolute
+			bottom: -1px
+			transition: all ease-in-out .2s
+			background: none repeat scroll 0 0 $dark
+			content: ""
+			display: block
+			height: 2px
+			width: 0
+		&:hover
+			text-decoration: none
+			&:after
+				width: 100%
+		&:hover
+			color: $dark

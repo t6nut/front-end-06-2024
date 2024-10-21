@@ -1,0 +1,55 @@
+$dark: #262633
+$light-blue: #8ECDD1
+
+.hero
+	margin: 20% 0 120px 60px
+	display: flex
+	border-radius: 4px
+	background-color: $light-blue
+	&__heading-mobile
+		display: none
+		text-align: center
+		font-size: 28px
+		font-weight: 300
+	h1
+		margin-bottom: 12px
+		font-size: 18px
+	&__image
+		margin: 60px 0 -60px -60px
+	&__text
+		margin: 60px 80px
+		&-corner
+			opacity: 0
+			display: none
+	&__btn
+		display: inline-flex
+		align-content: center
+		max-width: fit-content
+		position: relative
+		color: $dark
+		font-size: 14px
+		font-weight: 600
+		margin-top: 12px
+		border: none
+		background: none
+		text-decoration: none
+		&:after
+			position: absolute
+			bottom: -1px
+			transition: all ease-in-out .2s
+			background: none repeat scroll 0 0 $dark
+			content: ""
+			display: block
+			height: 2px
+			width: 0
+		&:hover
+			&:after
+				width: 100%
+			img
+				bottom: -2px
+		img
+			transition: all ease-in-out .2s
+			position: absolute
+			right: -24px
+			padding-left: 8px
+			bottom: 1px

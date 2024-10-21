@@ -1,10 +1,48 @@
+@font-face {
+	font-family: 'HelveticaNeue';
+	font-weight: 500;
+	src: local('HelveticaNeue'), url(./fonts/HelveticaNeueMedium.otf) format('opentype');
+}
+@font-face {
+	font-family: 'HelveticaNeue';
+	font-weight: 400;
+	src: local('HelveticaNeue'), url(./fonts/HelveticaNeueRoman.otf) format('opentype');
+}
+@font-face {
+	font-family: 'HelveticaNeue';
+	font-weight: 600;
+	src: local('HelveticaNeue'), url(./fonts/HelveticaNeueBold.otf) format('opentype');
+}
+@font-face {
+	font-family: 'HelveticaNeue';
+	font-weight: 300;
+	src: local('HelveticaNeue'), url(./fonts/HelveticaNeueLight.otf) format('opentype');
+}
+@font-face {
+	font-family: 'HelveticaNeue';
+	font-weight: 200;
+	src: local('HelveticaNeue'), url(./fonts/HelveticaNeueThin.otf) format('opentype');
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'HelveticaNeue'
+}
+html {
+	scroll-behavior: smooth;
+}
+
 body {
+	line-height: 1.35;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'HelveticaNeue', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+	font-weight: 400;
 }
 
 code {

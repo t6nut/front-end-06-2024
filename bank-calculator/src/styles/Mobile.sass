@@ -1,0 +1,99 @@
+@media (max-width: 567px)
+	.calculator__content-wrapper
+		flex-direction: column
+	.hero
+		&__heading-mobile
+			display: block
+
+@media (max-width: 768px)
+	.calculator
+		table
+			width: 100%
+		th:last-of-type
+			padding-left: 8px
+		th:first-of-type
+			padding-right: 8px
+		&__wrapper
+			padding: 40px 24px
+		&__sum
+			margin-left: 0
+		&__input
+			&[name="toode"]
+				width: calc(100% - 8px)
+				margin-right: 8px
+			&[name="hind"]
+				width: calc(100% - 8px)
+				max-width: 100%
+				margin-left: 8px
+		&__currency
+			right: 0
+		&__content-wrapper
+			flex-direction: column
+	.hero
+		position: relative
+		flex-direction: column
+		margin: 30px 40px 48px 40px
+		border-radius: 0
+		h1
+			padding: 20px 67px 30px 24px
+		&:hover &__text
+			height: 100%
+			&-heading
+				display: none
+			&-corner
+				transition: opacity .2s ease-in
+				opacity: 0
+			&-wrapper
+				display: flex
+				padding: 24px
+				transition: opacity .2s ease-in
+				background: #8ECDD1
+				opacity: 1
+				height: 100%
+				position: absolute
+		&__text-corner
+			display: block
+			opacity: 1
+			position: absolute
+			bottom: -1px
+			right: -1px
+		&__heading-mobile
+			margin-top: 40px
+		&__text
+			width: 100%
+			position: absolute
+			bottom: 0
+			background-color: #8ECDD1
+			margin: 0
+			&-wrapper
+				display: none
+				flex-direction: column
+				justify-content: center
+				height: 0
+				opacity: 0
+		&__image
+			margin: 0
+		&__heading-mobile
+			display: block
+
+	.footer
+		margin: 48px 28px
+		flex-direction: column
+		text-align: center
+		&__contact
+			margin-bottom: 48px
+			flex-direction: column
+			align-content: center
+			max-width: 100%
+			width: auto
+			&-phone
+				margin: 8px auto 16px auto
+		&__support
+			max-width: 100%
+			flex-direction: column
+			img
+				margin: 0 auto
+				max-width: 80px
+			&-text
+				margin: 24px 0 0 0
+		
