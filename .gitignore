@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 webshop/firebase-debug.log
 webshop/.firebase/hosting.YnVpbGQ.cache
+webshop/src/firebase/firebaseConfig.ts
+webshop/.env

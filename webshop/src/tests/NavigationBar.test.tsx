@@ -1,4 +1,3 @@
-/* import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -145,4 +144,4 @@ describe('NavigationBar', () => {
 		fireEvent.click(screen.getByText('nav.signup'));
 		expect(navigateMock).toHaveBeenCalledWith('/signup');
 	});
-}); */
+}); 

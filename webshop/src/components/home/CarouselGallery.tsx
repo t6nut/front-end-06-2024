@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { Picture } from '../../models/Picture';
 
